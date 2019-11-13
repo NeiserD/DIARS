@@ -53,7 +53,6 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                         return RedirectToAction("UserDashBoard");
                     }
                 }
-
             }
             validarambos(objUser);
             return View(objUser);

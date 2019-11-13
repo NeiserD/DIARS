@@ -28,8 +28,8 @@ a {
 .login-wrap {
     width: 100%;
     margin: 4px;
-    max-width: 825px;
-    min-height: 870px;
+    max-width: 625px;
+    min-height: 670px;
     position: relative;
     /*background: url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;*/
     background: url('../../../Img/loginbg.jpg');
