@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+
+    strong {
+        color: red;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+
+        <div class="container col-lg-6">
+            <h2 class="subtitulos text-center bg-primary">Editar categoría</h2>
+            <form action="/Categoria/Editar?ID=@Model.id" method="post">
+                <label>Nombre</label>
+                <input class="form-control" autocomplete="off" name="nombre" value="@Model.nombre" />
+                <br />
+                <strong> @Html.ValidationMessage("Nombre")</strong>
+                <br />
+                <label>Descripción</label>
+                <input style="height:45px" class="form-control" autocomplete="off" name="descripcion" value="@Model.descripcion" />
+                <br />
+                <strong>@Html.ValidationMessage("Descripcion")</strong>
+                <br />
+                <button class="btn btn-primary">Guardar</button>
+                <a class="btn btn-danger" href="/Categoria">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

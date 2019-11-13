@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container">
+    <a class="btn btn-success" href="/Categoria/Crear">Nueva Categoría</a>
+</div>
+
+<div>
+    <table class="table table-hover">
+        <thead class="bg-dark">
+            <tr>
+                <td><strong>Nombre</strong> </td>
+                <td><strong>Descripción</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.nombre</td>
+                    <td>@item.descripcion</td>
+                    <td class="text-right">
+                        <a class="btn btn-primary " href="/Categoria/Editar?ID=@item.id">Editar</a>
+                        <a class="btn btn-danger" href="/Categoria/Eliminar?ID=@item.id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,39 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+<div class="container">
+    <a class="btn btn-success" href="/Oferta/Crear">Crear Oferta</a>
+</div>
+
+<div>
+    <table class="table table-hover">
+        <thead class="bg-dark">
+            <tr>
+                <td><strong>Nombre</strong> </td>
+                <td><strong>Fecha de inicio</strong></td>
+                <td><strong>Fecha de fin</strong></td>
+                <td><strong>Descripción</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.nombre</td>
+                    <td>@item.fechaInicio</td>
+                    <td>@item.fechaFin</td>
+                    <td>@item.descripcion</td>
+                    <td class="text-right">
+                        <a class="btn btn-primary " href="/Oferta/Editar?ID=@item.id">Editar</a>
+                        <a class="btn btn-danger" href="/Oferta/Eliminar?ID=@item.id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

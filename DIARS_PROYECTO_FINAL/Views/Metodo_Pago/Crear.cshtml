@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+
+    strong {
+        color: red;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+
+        <div class="container col-lg-6">
+            <h2 class="subtitulos text-center bg-primary">Crear nuevo Método de Pago</h2>
+            <form action="/Metodo_Pago/Crear" method="post">
+                <label>Nombre</label>
+                <input class="form-control" autocomplete="off" name="nombre" value="" />
+                <br />
+                <strong> @Html.ValidationMessage("Nombre")</strong>
+                <br />
+                <button class="btn btn-primary">Guardar</button>
+                <a class="btn btn-danger" href="/Metodo_Pago">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿
+.subtitulos {
+    font-family: 'Arial Narrow';
+    word-spacing: 2px;
+    background: #242424;
+    color: white;
+    border: red 1px;
+    border-radius: 8px;
+}
+
