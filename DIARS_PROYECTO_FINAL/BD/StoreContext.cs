@@ -14,6 +14,7 @@ namespace DIARS_PROYECTO_FINAL.BD
         public IDbSet<MetodoPago> metodoPagos { get; set; }
         public IDbSet<Oferta> ofertas { get; set; }
         public IDbSet<Usuario>  Usuarios{ get; set; }
+        public IDbSet<Producto> Productos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -22,6 +23,7 @@ namespace DIARS_PROYECTO_FINAL.BD
             modelBuilder.Configurations.Add(new MetodoPagoMap());
             modelBuilder.Configurations.Add(new OfertaMap());
             modelBuilder.Configurations.Add(new UsuarioMap());
+            modelBuilder.Configurations.Add(new ProductoMap());
         }
     }
     
