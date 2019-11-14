@@ -5,10 +5,16 @@
 
 <style>
     strong {
-    color:red;
+    color:rgba(255, 0, 0, 0.72);
     }
     label {
         color:rgba(248, 245, 245, 0.77);
+    }
+    .a {
+        color: rgba(248, 245, 245, 0.77);
+    }
+    .alto {
+        height: 100%;
     }
 </style>
     <div class="container">
@@ -18,10 +24,10 @@
             </div>
             <div class="col-md-6">
                 <div class="login-wrap">
-                    <div style="height:870px" class="login-html">
-                        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Iniciar Sesión</label>
-                        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registrarse</label>
-                        <div class="login-form  " role="menu">
+                    <div  class="login-html alto">
+                        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab"> <a class="a" href="/User/Login"> Iniciar Sesión</a></label>
+                        <input id="tab-2" type="radio" name="tab"   class="sign-up"><label for="tab-2" class="tab"  ><a class="a"href="/User/Registrar"> Registrarse</a></label>
+                        <div class="login-form " role="menu">
                             <div class="sign-in-htm">
                                 <form action="/User/Login" method="post">
                                     <fieldset>
@@ -93,7 +99,7 @@
                                     <div class="group">
                                         <input type="submit" class="button" value="Registrar">
                                     </div>
-                                    <div class="hr"></div>
+                                   
                                 </div>
                             </form>
                         </div>

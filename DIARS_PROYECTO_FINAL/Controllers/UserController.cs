@@ -77,7 +77,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             //ModelState.AddModelError("", "Sesión Cerrada");
         }
         [HttpGet]
-        public ActionResult Registrar()
+        public ViewResult Registrar()
         {
            
             return View(new Usuario());
@@ -130,10 +130,10 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             {
                 ModelState.AddModelError("DNI", "El campo DNI es requerido");
             }
-            if (usuario.celular == null || usuario.celular == "")
-            {
-                ModelState.AddModelError("Celular", "El campo Celular es requerido");
-            }
+            //if (usuario.celular == null || usuario.celular == "")
+            //{
+            //    ModelState.AddModelError("Celular", "El campo Celular es requerido");
+            //}
             if (usuario.email == null || usuario.email == "")
             {
                 ModelState.AddModelError("Email1", "El campo Email es requerido");

@@ -1,0 +1,114 @@
+﻿@model DIARS_PROYECTO_FINAL.Models.Usuario
+@{
+    ViewBag.Title = "Registrar";
+}
+<style>
+    strong {
+        color: rgba(255, 0, 0, 0.72);
+    }
+
+    label {
+        color: rgba(248, 245, 245, 0.77);
+    }
+    .a {
+        color: rgba(248, 245, 245, 0.77);
+    }
+    .alto {
+        height: 100%;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <div class="login-wrap ">
+                <div style="height:870px" class="login-html alto">
+                    <input id="tab-1" type="radio" name="tab" class="sign-in " ><label for="tab-1" class="tab"><a class="a" href="/User/Login">Iniciar Sesión</a></label>
+                    <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab"> <a class="a" href="/User/Registrar"> Registrarse</a></label>
+                    <div class="login-form  " role="menu">
+                        <div class="sign-in-htm">
+                            <form action="/User/Login" method="post">
+                                <fieldset>
+                                    <div class="group">
+                                        <label for="user" class="label">Usuario</label>
+                                        <input id="user" type="text" autocomplete="off" class="input" value="" name="username">
+                                        <strong>@Html.ValidationMessage("username")</strong>
+                                    </div>
+                                    <div class="group">
+                                        <label for="pass" class="label">Contraseña</label>
+                                        <input id="pass" type="password" autocomplete="off" class="input" data-type="password" name="password">
+                                        <strong>@Html.ValidationMessage("password")</strong>
+                                    </div>
+                                    @*<div class="group">
+                                            <input id="check" type="checkbox" class="check">
+                                            <label for="check"><span class="icon"></span>Acepto recibir notificaciones</label>
+                                        </div>*@
+                                    <a class="btn btn-dark" style="color:white" href="/Home">¿Olvido su contraseña?</a>
+                                    <div>
+                                        <strong>@Html.ValidationMessage("invalid") </strong>
+                                    </div>
+                                    <br />
+                                    <div class="group">
+                                        <input type="submit" class=" btn button" value="Login">
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <div class="hr"></div>
+                            <div> </div>
+                        </div>
+                        @*------------------------------------Esto es el registrar----------------------------------*@
+                        <form action="/User/Registrar" method="post">
+                            <div class="sign-up-htm">
+                                <div class="group">
+                                    <label for="user" class="label">Nombres</label>
+                                    <input id="user" autocomplete="off" type="text" class="input" name="nombres">
+                                    <strong>@Html.ValidationMessage("Nombre1")</strong>
+                                </div>
+                                <div class="group">
+                                    <label for="user" class="label">Apellidos</label>
+                                    <input id="user" autocomplete="off" type="text" class="input" name="apellidos">
+                                    @*<strong>@Html.ValidationMessage("Apellido1")</strong>*@
+                                </div>
+                                <div class="group">
+                                    <label for="pass" class="label">DNI</label>
+                                    <input id="pass" name="dni" type="text" class="input">
+                                    <strong>@Html.ValidationMessage("DNI")</strong>
+                                </div>
+                                @*<div class="group">
+                                    <label for="pass" class="label">Celular</label>
+                                    <input id="pass" name="celular" type="text" class="input">
+                                    <strong>@Html.ValidationMessage("Celular")</strong>
+                                </div>*@
+                                <div class="group">
+                                    <label for="pass" class="label">Email</label>
+                                    <input id="pass" name="email" type="text" class="input">
+                                    @*<strong>@Html.ValidationMessage("Email1")</strong>*@
+                                </div>
+                                <div class="group">
+                                    <label for="pass" class="label">Nombre de Usuario</label>
+                                    <input id="pass" name="username" type="text" class="input">
+                                    <strong>@Html.ValidationMessage("UserName1")</strong>
+                                </div>
+                                <div class="group">
+                                    <label for="pass" class="label">Contraseña</label>
+                                    <input id="pass" type="password" class="input" data-type="password" name="password">
+                                    <strong>@Html.ValidationMessage("Password1")</strong>
+                                </div>
+
+                                <div class="group">
+                                    <input type="submit" class="button" value="Registrar">
+                                </div>
+                                <div class="hr"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
