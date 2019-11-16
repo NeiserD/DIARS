@@ -11,23 +11,23 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     {
 
         public StoreContext context = new StoreContext();
-
+        [Authorize]
         public ViewResult Index()
         {
             var categorias = context.Categorias.ToList();
             return View(categorias);
         }
 
-      
 
 
-        // GET: Categoría/Create
+
+        [Authorize]
         public ViewResult Crear()
         {
             return View(new Categoria());
         }
 
-        // POST: Categoría/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Crear(Categoria categoria)
         {
@@ -42,6 +42,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(categoria);
         }
 
+        [Authorize]
         [HttpGet]
         public ViewResult Editar(int ID)
         {
@@ -49,7 +50,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(categoria);
         }
 
-        // POST: Categoría/Edit/5
+        [Authorize]
         [HttpPost]
         public ActionResult Editar(Categoria categoria)
         {
@@ -63,7 +64,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(categoria);
 
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult Eliminar(int ID)
         {

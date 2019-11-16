@@ -12,24 +12,29 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class ProductoController : Controller
     {
         public StoreContext context = new StoreContext();
+        [Authorize]
         public ActionResult Index()
         {
             var productos = context.Productos.ToList();
             return View(productos);
         }
-        
-        public ActionResult Details(int id)
+
+        public ActionResult Especificaciones(int ID)
         {
-            return View();
+            Producto producto = context.Productos.Find(ID);
+
+            return View(producto);
         }
 
         // GET: Producto/Create
+        [Authorize]
         public ActionResult Crear()
         {
             return View(new Producto());
         }
 
         // POST: Producto/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Crear(Producto producto, HttpPostedFileBase file)
         {

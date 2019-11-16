@@ -1,4 +1,5 @@
 ﻿using DIARS_PROYECTO_FINAL.BD;
+using DIARS_PROYECTO_FINAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(products);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
+       
 
         public ActionResult Contact()
         {
@@ -31,7 +27,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View();
         }
 
-        public ActionResult Map() {
+        public ActionResult Ubication() {
             return View();
         }
 

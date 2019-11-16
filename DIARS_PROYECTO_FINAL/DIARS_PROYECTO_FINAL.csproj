@@ -411,6 +411,7 @@
     <Content Include="Views\User\Registrar.cshtml" />
     <Content Include="Views\Producto\Crear.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Producto\Especificaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

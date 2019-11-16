@@ -12,6 +12,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class OfertaController : Controller
     {
         StoreContext context = new StoreContext();
+        [Authorize]
         public ActionResult Index()
         {
             var oferta = context.ofertas.ToList();
@@ -19,12 +20,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Oferta/Create
+        [Authorize]
         public ActionResult Crear()
         {
             return View(new Oferta());
         }
 
         // POST: Oferta/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Crear(Oferta oferta)
         {
@@ -51,6 +54,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Oferta/Edit/5
+        [Authorize]
         public ActionResult Editar(int ID)
         {
 
@@ -60,6 +64,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // POST: Oferta/Edit/5
+        [Authorize]
         [HttpPost]
         public ActionResult Editar(Oferta oferta)
         {
@@ -86,6 +91,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Oferta/Delete/5
+        [Authorize]
         public ActionResult Eliminar(int ID)
         {
             Oferta oferta = context.ofertas.Where(x=>x.id== ID).First();

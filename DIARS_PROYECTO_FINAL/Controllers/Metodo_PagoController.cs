@@ -12,7 +12,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class Metodo_PagoController : Controller
     {
         StoreContext context = new StoreContext();
-
+        [Authorize]
         public ActionResult Index()
         {
             var pagos = context.metodoPagos.ToList();
@@ -22,12 +22,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 
 
         // GET: Metodo_Pago/Create
+        [Authorize]
         public ActionResult Crear()
         {
             return View(new MetodoPago());
         }
 
         // POST: Metodo_Pago/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Crear(MetodoPago metodoPago)
         {
@@ -40,19 +42,8 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 return RedirectToAction("Index");
             }
             return View(metodoPago);
-
-            //try
-            //{
-            //    context.metodoPagos.Add(metodoPago);
-            //    context.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View(metodoPago);
-            //}
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult Editar(int ID)
         {
@@ -61,7 +52,8 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(metodoPag);
         }
 
-        // POST: Metodo_Pago/Edit/5
+        
+        [Authorize]
         [HttpPost]
         public ActionResult Editar(MetodoPago metodoPago)
         {
@@ -74,20 +66,9 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 return RedirectToAction("Index");
             }
             return View(metodoPago);
-
-            //try
-            //{
-            //    context.Entry(metodoPago).State = EntityState.Modified;
-            //    context.SaveChanges();
-
-            //    return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            
         }
-        
+        [Authorize]
         [HttpGet]
         public ActionResult Eliminar(int ID)
         {
