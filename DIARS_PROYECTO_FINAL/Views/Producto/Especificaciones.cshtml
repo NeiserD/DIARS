@@ -3,28 +3,81 @@
     ViewBag.Title = "Especificaciones";
 }
 
-<style >
-    .strong {
-        color:red;
+<style>
+    body {
+        padding-top: 50px;
     }
+
+    .row {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+
+    .btn-primary:not(.active) > .fa-check-circle {
+        display: none;
+    }
+        .strong {
+            color: red;
+        }
+        /*******************************
+    * ACCORDION WITH TOGGLE ICONS
+    * Does not work properly if "in" is added after "collapse".
+    * Get free snippets on bootpen.com
+    *******************************/
+        .panel-group .panel {
+            border-radius: 0;
+            box-shadow: none;
+            border-color: #EEEEEE;
+        }
+
+        .panel-default > .panel-heading {
+            padding: 0;
+            border-radius: 0;
+            color: #212121;
+            background-color: #FAFAFA;
+            border-color: #EEEEEE;
+        }
+
+        .panel-title {
+            font-size: 14px;
+        }
+
+            .panel-title > a {
+                display: block;
+                padding: 15px;
+                text-decoration: none;
+                background-color: #fff;
+            }
+
+        .more-less {
+            float: right;
+            color: #ffc704;
+        }
+
+        .panel-default > .panel-heading + .panel-collapse > .panel-body {
+            border-top-color: #ededed;
+        }
 </style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6 text-left col-sm-6">
-            <div class="">
-                <img src="@Model.imagen" style="width:400px;height:500px" />
-                <br />
+            <div class="product">
+                <div class="product-img text-center">
+                    <img src="@Model.imagen" style="width:400px;height:500px" />
+                    <br />
+                </div>
             </div>
         </div>
 
-        <div class="col-sm-6 text-left">
+        <div class="col-sm-6 ">
             <div class="col-lg-12">
 
-                <br />
-                <br />
-                <br />
-                <h2>@Model.nombre</h2>
+                <h2>@Model.nombre   @Model.modelo    @Model.marca</h2>
             </div>
 
             <br />
@@ -32,72 +85,204 @@
             <br />
             <br />
             <div class="row col-lg-12">
-                <div class="text-left">
-                    <strong class="strong">Internet  <strong class="precio strong">S/ @Model.precio</strong></strong>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <strong class="strong">Internet  </strong>
+                    </div>
+                    <div class="col-sm-3">
+                        <strong class="precio strong">S/ @Model.precio</strong>
+                    </div>
                 </div>
-            </div>
-            <br />
-            <br />
-            <div class="col-lg-4">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
-                            <span class="glyphicon glyphicon-minus"></span>
-                        </button>
-                    </span>
-                    <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
-                    <span class="input-group-btn">
-                        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-9 text-right">
-                <a class="btn btn-primary" href="/Compra/Crear">Agregar al carrito</a>
+                @*<div class="text-left">
+                <strong class="strong">Internet  <strong class="precio strong">S/ @Model.precio</strong></strong>
+            </div>*@
             </div>
 
+            <div class="col-sm-12">
+                <br />
+                <br />
+            </div>
+            <div class="row col-lg-12">
+                <div class="container">
+                    <div class="row">
+                        <strong class="">Talla</strong>
+                        <br />
+                        <div class="btn-group" data-toggle="buttons">
+
+                            <label class="btn btn-warning ">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                26
+                            </label>
+                            <label class="btn btn-warning ">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                @Model.talla
+                            </label>
+                            <label class="btn btn-warning ">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                30
+                            </label>
+                            <label class="btn btn-warning ">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                32
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <br />
+                <br />
+                <br />
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="col-lg-3">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button style="height:34px" type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" data-field="">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="1" max="100">
+                                <span class="input-group-btn">
+                                    <button style="height:34px" type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <br>
+                    <br />
+                </div>
+                    <div>
+                        <a class="btn btn-primary" href="/Compra/Crear">Agregar a la bolsa</a>
+                    </div>
+                </div>
+            </div>
+            
+
         </div>
-        <div class="col-md-12 text-left col-sm-6">
-            <h2>Descripción</h2>
-            <p>este es una descripciónn de marabkaosjd kjahasdasgd havsdhvzbcvzavd hgsajdhags ajsdg jahsgdjhags djhagsjdh agjdhgasjhd gajhsgd jashgsdjh a</p>
-        </div>
+        <hr />
+        <br />
+
+    </div>
+<br />
+<br />
+<div>
+  
+    <div class="col-md-12 text-left col-sm-6">
        
     </div>
+    <div class="container demo">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default bg-info">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title card">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="more-less glyphicon glyphicon-plus"></i>
 
+                            <strong class="card-header" >  Descripción</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        @Model.descripcion
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree"> 
+
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <span class="more-less glyphicon glyphicon-plus "></span>
+                          <strong> Especificaciones</strong>
+                        </a>
+                    </h4>
+                </div>
+              
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree"> 
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                Marca
+                            </div>
+                            <div class="col-sm-4">
+                                @Model.marca
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                Modelo
+                            </div>
+                            <div class="col-sm-4">
+                                @Model.modelo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel-group -->
+    </div><!-- container -->
+</div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-var quantitiy=0;
-   $('.quantity-right-plus').click(function(e){
-        
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity').val());
-        
-        // If is not undefined
-            
+        var quantitiy = 0;
+        $('.quantity-right-plus').click(function (e) {
+
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
             $('#quantity').val(quantity + 1);
-
-          
             // Increment
-        
-    });
+        });
 
-     $('.quantity-left-minus').click(function(e){
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var quantity = parseInt($('#quantity').val());
-        
-        // If is not undefined
-      
+        $('.quantity-left-minus').click(function (e) {
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+
+            // If is not undefined
+
             // Increment
-            if(quantity>0){
-            $('#quantity').val(quantity - 1);
+            if (quantity > 0) {
+                $('#quantity').val(quantity - 1);
             }
+        });
+
     });
-    
-});
+
+    /*******************************
+  * ACCORDION WITH TOGGLE ICONS
+  *******************************/
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-chevron-up glyphicon-chevron-down');
+    }
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
+
 </script>

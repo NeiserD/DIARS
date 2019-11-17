@@ -27,14 +27,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Producto/Create
-        [Authorize]
+       
         public ActionResult Crear()
         {
             return View(new Producto());
         }
 
         // POST: Producto/Create
-        [Authorize]
+    
         [HttpPost]
         public ActionResult Crear(Producto producto, HttpPostedFileBase file)
         {
@@ -50,7 +50,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 producto.isActive = true;
                 context.Productos.Add(producto);
                 context.SaveChanges();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index");
             }
             return View(producto);
         }

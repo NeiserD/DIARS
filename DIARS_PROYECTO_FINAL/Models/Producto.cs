@@ -16,5 +16,9 @@ namespace DIARS_PROYECTO_FINAL.Models
         public bool isActive { get; set; }
         public string imagen { get; set; }
         public Categoria Categoria { get; set; }
+        public string descripcion { get; set; }
+        public string marca { get; set; }
+        public string modelo { get; set; }
+        public int talla { get; set; }
     }
 }

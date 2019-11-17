@@ -6,28 +6,48 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <form action="/Producto/Crear" method="post" enctype="multipart/form-data">
-                <label>Nombre del Producto</label>
-                <input class="form-control" type="text" name="nombre" value="" />
-                @*<label>Fecha de Registro</label>
-                <input class="form-control" type="datetime" name="fecha" value="" />*@
-                <label>Precio</label>
-                <input class="form-control" type="number" name="precio" value="" />
-                <label>Categoría</label>
-                <input class="form-control" name="idCategoria" value="" />
-                <label>Stock</label>
-                <input class="form-control" name="stock" value="" />
+                <div class="col-md-4">
+
+                    <label>Nombre del Producto</label>
+                    <input class="form-control" autofocus autocomplete="off" type="text" name="nombre" value="" />
+                    @*<label>Fecha de Registro</label>
+                    <input class="form-control" type="datetime" name="fecha" value="" />*@
+                    <label>Precio</label>
+                    <input class="form-control"  name="precio" value="" />
+                    <label>Categoría</label>
+                    <input class="form-control" name="idCategoria" value="" />
+                    <label>Stock</label>
+                    <input class="form-control" name="stock" value="" />
+                </div>
                 @*<label>Estado</label>
                 <input class="form-control" name="isActive" value="" />*@
-                <label>Imagen del Producto</label>
-                <input class="form-control" type="file" name="file" value="" />
-                <br />
-                <br />
+                <div class="col-md-4">
+                    <label>Descripción</label>
+                    <textarea class="form-control" name="descripcion" value=""></textarea>
+                    <label>Marca</label>
+                    <input class="form-control" name="marca" value="" />
+                    <label>Modelo</label>
+                    <input class="form-control" name="modelo" value="" />
+                    <label>talla</label>
+                    <input class="form-control" name="talla" value="" />
+                    @*<select name="talla">
+            <option value="">--------Eliga una opción---------</option>
+            <option value="28">28</option>
+            <option value="28">30</option>
+            <option value="28">32</option>
+            <option value="28">36</option>
+        </select>*@
+
+                    <label>Imagen del Producto</label>
+                    <input class="form-control" type="file" name="file" value="" />
+                    <br />
+                    <br />
+                </div>
                 <button class="btn btn-success">Crear Producto</button>
             </form>
         </div>
-        <div class="col-md-4"></div>
     </div>
-    </div>
+</div>
+
