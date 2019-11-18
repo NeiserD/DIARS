@@ -17,19 +17,28 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             var products = context.Productos.ToList();
             return View(products);
         }
-
-       
-
-        public ActionResult Contact()
+        
+        public ActionResult UserDashBoard()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
         public ActionResult Ubication() {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult enviarCorreo() {
+
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult enviarCorreo()
+        //{
+
+        //    return View();
+        //}
 
     }
 }

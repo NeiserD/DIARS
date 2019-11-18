@@ -178,3 +178,9 @@ E:\Eliminar-ramaNeiser\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.cspro
 E:\Eliminar-ramaNeiser\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.csproj.CopyComplete
 E:\Eliminar-ramaNeiser\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.dll
 E:\Eliminar-ramaNeiser\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.pdb
+C:\Users\NEYDC\source\repos\DIARS_PROYECTO_FINAL\DIARS_PROYECTO_FINAL\bin\System.Net.Http.Formatting.dll
+C:\Users\NEYDC\source\repos\DIARS_PROYECTO_FINAL\DIARS_PROYECTO_FINAL\bin\System.Web.Http.dll
+C:\Users\NEYDC\source\repos\DIARS_PROYECTO_FINAL\DIARS_PROYECTO_FINAL\bin\System.Web.Http.WebHost.dll
+C:\Users\NEYDC\source\repos\DIARS_PROYECTO_FINAL\DIARS_PROYECTO_FINAL\bin\System.Net.Http.Formatting.xml
+C:\Users\NEYDC\source\repos\DIARS_PROYECTO_FINAL\DIARS_PROYECTO_FINAL\bin\System.Web.Http.xml
+C:\Users\NEYDC\source\repos\DIARS_PROYECTO_FINAL\DIARS_PROYECTO_FINAL\bin\System.Web.Http.WebHost.xml

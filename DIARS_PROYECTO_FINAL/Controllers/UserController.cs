@@ -2,6 +2,7 @@
 using DIARS_PROYECTO_FINAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,14 +11,36 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class UserController : Controller
     {
-
-        public ActionResult Index() {
-            using (StoreContext context = new StoreContext())
-            {
-                var users= context.Usuarios.ToList();
+        public StoreContext context = new StoreContext();
+        public ActionResult Index()
+        {
+            
+                var users = context.Usuarios.ToList();
                 return View(users);
-            }
         }
+
+        [HttpGet]
+        public ActionResult ProfileDetails(int ID)
+        {
+            var users = context.Usuarios.Where(a => a.Id == ID).FirstOrDefault();
+            ViewBag.Id = users.Id;
+            return View(users);
+            
+        }
+
+        [HttpPost]
+        public ActionResult ProfileDetails(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Entry(usuario).State = EntityState.Modified;
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(usuario);
+        }
+
+        
 
         [HttpGet]
         public ActionResult Eliminar(int ID)
@@ -34,7 +57,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            return View(new Usuario());
         }
 
         [HttpPost]
@@ -50,25 +73,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                     {
                         Session["Id"] = obj.Id.ToString();
                         Session["username"] = obj.nombres.ToString();
-                        return RedirectToAction("UserDashBoard");
+                        return RedirectToAction("Index","Home");
                     }
                 }
             }
             validarambos(objUser);
             return View(objUser);
         }
-
-        public ActionResult UserDashBoard()
-        {
-            if (Session["Id"] != null)
-            {
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
+        
         public ActionResult Salir()
         {
             Session.Abandon();
@@ -79,15 +91,17 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpGet]
         public ViewResult Registrar()
         {
-           
+
             return View(new Usuario());
         }
         [HttpPost]
-        public ActionResult Registrar(Usuario usuario ) {
+        public ActionResult Registrar(Usuario usuario)
+        {
             validarUsuarios(usuario);
             if (ModelState.IsValid)
             {
-                using (StoreContext context = new StoreContext()){
+                using (StoreContext context = new StoreContext())
+                {
                     usuario.IdRol = 2;
                     context.Usuarios.Add(usuario);
                     context.SaveChanges();
@@ -117,10 +131,11 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             }
         }
 
-        public void validarUsuarios(Usuario usuario) {
-            if (usuario.nombres == null || usuario.nombres=="")
+        public void validarUsuarios(Usuario usuario)
+        {
+            if (usuario.nombres == null || usuario.nombres == "")
             {
-                ModelState.AddModelError("Nombre1","Este campo es requerido");
+                ModelState.AddModelError("Nombre1", "Este campo es requerido");
             }
             if (usuario.apellidos == null || usuario.apellidos == "")
             {

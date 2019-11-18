@@ -33,12 +33,12 @@
                                     <fieldset>
                                         <div class="group">
                                             <label for="user" class="label">Usuario</label>
-                                            <input id="user" type="text" autocomplete="off" class="input" value="" name="username">
+                                            <input id="user" type="text" autocomplete="off" class="input" value="@Model.username" name="username">
                                             <strong>@Html.ValidationMessage("username")</strong>
                                         </div>
                                         <div class="group">
                                             <label for="pass" class="label">Contraseña</label>
-                                            <input id="pass" type="password" autocomplete="off" class="input" data-type="password" name="password">
+                                            <input value="@Model.password" id="pass" type="password" autocomplete="off" class="input" data-type="password" name="password">
                                             <strong>@Html.ValidationMessage("password")</strong>
                                         </div>
                                         @*<div class="group">
