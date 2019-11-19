@@ -18,16 +18,11 @@
 
         <div class="container col-lg-6">
             <h2 class="subtitulos text-center bg-primary">Crear nueva Oferta</h2>
-            <form action="/Oferta/Crear" method="post">
+            <form action="/Oferta/Crear" method="post" enctype="multipart/form-data">
                 <label>Nombre</label>
                 <input class="form-control" autocomplete="off" name="nombre" value="" />
                 <br />
                 <strong> @Html.ValidationMessage("Nombre")</strong>
-                <br />
-                <label>Fecha de Inicio</label>
-                <input class="form-control" autocomplete="off" name="fechaInicio" value="" />
-                <br />
-                <strong> @Html.ValidationMessage("FechaInicio")</strong>
                 <br />
                 <label>Fecha de Fin</label>
                 <input class="form-control" autocomplete="off" name="fechaFin" value="" />
@@ -38,6 +33,11 @@
                 <input style="height:45px" class="form-control" autocomplete="off" name="descripcion" value="" />
                 <br />
                 <strong> @Html.ValidationMessage("Descripcion")</strong>
+                <br />
+                <label>Imagen del Producto</label>
+                <input class="form-control" type="file" name="file" value="" />
+                <br />
+                <strong> @Html.ValidationMessage("Nombre")</strong>
                 <br />
                 <button class="btn btn-primary">Guardar</button>
                 <a class="btn btn-danger" href="/Oferta">Cancelar</a>

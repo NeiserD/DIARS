@@ -12,6 +12,7 @@ namespace DIARS_PROYECTO_FINAL.Models
         public DateTime fechaInicio{ get; set; }
         public DateTime fechaFin { get; set; }
         public string descripcion{ get; set; }
+        public string imagen { get; set; }
 
     }
 }

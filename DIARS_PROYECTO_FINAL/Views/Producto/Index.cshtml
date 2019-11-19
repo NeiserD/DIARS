@@ -38,9 +38,9 @@
             <td>@item.stock</td>
             <td>@item.isActive</td>
             <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
-            <td >
-                <a class="btn btn-outline-success" href="/Producto/Editar">Editar</a>
-                <a class="btn btn-outline-success" href="/Producto/Eliminar">Eliminar</a>
+            <td>
+                <a class="btn btn-outline-success" href="/Producto/Editar?ID=@item.Id">Editar</a>
+                <a class="btn btn-outline-success" href="/Producto/Eliminar?ID=@item.Id">Eliminar</a>
             </td>
 
             @*@if (ViewBag.usuario != null)

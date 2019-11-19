@@ -3,6 +3,7 @@ using DIARS_PROYECTO_FINAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,7 +13,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class OfertaController : Controller
     {
         StoreContext context = new StoreContext();
-        [Authorize]
+       
         public ActionResult Index()
         {
             var oferta = context.ofertas.ToList();
@@ -20,41 +21,37 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Oferta/Create
-        [Authorize]
+        
         public ActionResult Crear()
         {
             return View(new Oferta());
         }
 
         // POST: Oferta/Create
-        [Authorize]
+       
         [HttpPost]
-        public ActionResult Crear(Oferta oferta)
+        public ActionResult Crear(Oferta oferta, HttpPostedFileBase file)
         {
             ValidarOfer(oferta);
 
+            if (file != null && file.ContentLength > 0)
+            {
+                string ruta = Path.Combine(Server.MapPath("~/imagenes"), Path.GetFileName(file.FileName));
+                file.SaveAs(ruta);
+                oferta.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
+            }
             if (ModelState.IsValid)
             {
+                oferta.fechaInicio = DateTime.Now;
                 context.ofertas.Add(oferta);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(oferta);
-
-            //try
-            //{
-            //    context.ofertas.Add(oferta);
-            //    context.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View(oferta);
-            //}
         }
 
         // GET: Oferta/Edit/5
-        [Authorize]
+        
         public ActionResult Editar(int ID)
         {
 
@@ -64,11 +61,11 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // POST: Oferta/Edit/5
-        [Authorize]
+        
         [HttpPost]
-        public ActionResult Editar(Oferta oferta)
+        public ActionResult Editar(Oferta oferta, HttpPostedFileBase file)
         {
-
+            
             ValidarOfer(oferta);
             if (ModelState.IsValid)
             {
@@ -91,7 +88,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Oferta/Delete/5
-        [Authorize]
+        
         public ActionResult Eliminar(int ID)
         {
             Oferta oferta = context.ofertas.Where(x=>x.id== ID).First();

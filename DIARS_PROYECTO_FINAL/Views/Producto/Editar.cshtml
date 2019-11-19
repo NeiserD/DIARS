@@ -1,34 +1,23 @@
 ﻿
-@{
-    ViewBag.Title = "Crear";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <form action="/Producto/Crear" method="post" enctype="multipart/form-data">
+            <form action="/Producto/Editar" method="post" enctype="multipart/form-data">
                 <div class="col-md-4">
 
                     <label>Nombre del Producto</label>
                     <input class="form-control" autofocus autocomplete="off" type="text" name="nombre" value="@Model.nombre" />
                     @*<label>Fecha de Registro</label>
-        <input class="form-control" type="datetime" name="fecha" value="" />*@
+                        <input class="form-control" type="datetime" name="fecha" value="" />*@
                     <label>Precio</label>
                     <input class="form-control" name="precio" value="@Model.precio" />
                     <label>Categoría</label>
-                    <select name="idCategoria">
-                        <option value="">--------Eliga una opción---------</option>
-                        @foreach (var item in ViewBag.Categoria)
-                        {
-                            <option value="@item.id">@item.nombre</option>
-                        }
-                    </select>
+                    <input class="form-control" name="idCategoria" value="@Model.idCategoria" />
                     <label>Stock</label>
                     <input class="form-control" name="stock" value="@Model.stock" />
                 </div>
                 @*<label>Estado</label>
-                <input class="form-control" name="isActive" value="" />*@
+                    <input class="form-control" name="isActive" value="" />*@
                 <div class="col-md-4">
                     <label>Descripción</label>
                     <textarea class="form-control" name="descripcion" value="@Model.descripcion"></textarea>
@@ -37,21 +26,25 @@
                     <label>Modelo</label>
                     <input class="form-control" name="modelo" value="@Model.modelo" />
                     <label>talla</label>
-                    @*<input class="form-control" name="talla" value="@Model.talla" />*@
-                    <select name="talla">
-                        <option value="">--------Eliga una opción---------</option>
-                        <option value="28">28</option>
-                        <option value="28">30</option>
-                        <option value="28">32</option>
-                        <option value="28">36</option>
-                    </select>
+                    <input class="form-control" name="talla" value="@Model.talla" />
+                    @*<select name="talla">
+            <option value="">--------Eliga una opción---------</option>
+            <option value="28">28</option>
+            <option value="28">30</option>
+            <option value="28">32</option>
+            <option value="28">36</option>
+        </select>*@
 
                     <label>Imagen del Producto</label>
-                    <input class="form-control" type="file" name="file" value="" />
+                    <input class="form-control" type="file" name="file" value="@Model.imagen" />
                     <br />
                     <br />
+                    <button class="btn btn-success">Guardar Cambios</button>
+                    <div>
+                        <a class="btn btn-primary" href="/Producto/">Cancelar</a>
+                    </div>
                 </div>
-                <button class="btn btn-success">Crear Producto</button>
+                
             </form>
         </div>
     </div>

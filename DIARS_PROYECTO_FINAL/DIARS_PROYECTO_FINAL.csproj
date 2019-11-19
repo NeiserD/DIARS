@@ -131,12 +131,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BD\Maps\DireccionesMap.cs" />
     <Compile Include="BD\Maps\MetodoPagoMap.cs" />
     <Compile Include="BD\Maps\OfertaMap.cs" />
     <Compile Include="BD\Maps\ProductoMap.cs" />
     <Compile Include="BD\Maps\UsuarioMap.cs" />
     <Compile Include="BD\StoreContext.cs" />
     <Compile Include="BD\Maps\CategoriaMap.cs" />
+    <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -147,6 +149,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Direcciones.cs" />
     <Compile Include="Models\MetodoPago.cs" />
     <Compile Include="Models\Oferta.cs" />
     <Compile Include="Models\Producto.cs" />
@@ -424,6 +427,8 @@
     <Content Include="Views\Producto\Index.cshtml" />
     <Content Include="Views\Producto\Especificaciones.cshtml" />
     <Content Include="Views\User\ProfileDetails.cshtml" />
+    <Content Include="Views\Direccion\Index.cshtml" />
+    <Content Include="Views\Direccion\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

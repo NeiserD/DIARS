@@ -17,7 +17,7 @@
         </div>
 
         <div class="container col-lg-6">
-            <h2 class="subtitulos text-center bg-primary">Crear nueva Oferta</h2>
+            <h2 class="subtitulos text-center bg-primary">Editar Oferta:@Model.nombre</h2>
             <form action="/Oferta/Editar" method="post">
                 <label>Nombre</label>
                 <input class="form-control" autocomplete="off" name="nombre" value="@Model.nombre" />
@@ -36,6 +36,10 @@
                 <br />
                 <label>Descripción</label>
                 <input style="height:45px" class="form-control" autocomplete="off" name="descripcion" value="@Model.descripcion" />
+                <br />
+                <strong> @Html.ValidationMessage("Descripcion")</strong>
+                <label>Imagen</label>
+                <input readonly style="height:45px" class="form-control" name="file" value="@Model.imagen" />
                 <br />
                 <strong> @Html.ValidationMessage("Descripcion")</strong>
                 <br />

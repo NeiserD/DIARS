@@ -12,7 +12,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class ProductoController : Controller
     {
         public StoreContext context = new StoreContext();
-        [Authorize]
+        
         public ActionResult Index()
         {
             var productos = context.Productos.ToList();
@@ -30,6 +30,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
        
         public ActionResult Crear()
         {
+            ViewBag.Categoria = context.Categorias;
             return View(new Producto());
         }
 
@@ -38,6 +39,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpPost]
         public ActionResult Crear(Producto producto, HttpPostedFileBase file)
         {
+            ViewBag.Categoria = context.Categorias;
             if (file != null && file.ContentLength > 0)
             {
                 string ruta = Path.Combine(Server.MapPath("~/imagenes"), Path.GetFileName(file.FileName));
@@ -77,26 +79,13 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             }
         }
 
-        // GET: Producto/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Eliminar(int ID)
         {
-            return View();
+            Producto producto = context.Productos.Where(x => x.Id == ID).First();
+            context.Productos.Remove(producto);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        // POST: Producto/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
