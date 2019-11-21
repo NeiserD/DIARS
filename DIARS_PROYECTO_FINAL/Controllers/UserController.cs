@@ -1,11 +1,13 @@
 ﻿using DIARS_PROYECTO_FINAL.BD;
 using DIARS_PROYECTO_FINAL.Models;
+using DIARS_PROYECTO_FINAL.Sources;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DIARS_PROYECTO_FINAL.Controllers
 {
@@ -68,11 +70,13 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             {
                 using (StoreContext db = new StoreContext())
                 {
-                    var obj = db.Usuarios.Where(a => a.username.Equals(objUser.username) && a.password.Equals(objUser.password)).FirstOrDefault();
-                    if (obj != null)
+                    var usuario_confirmado = db.Usuarios.Where(a => a.username.Equals(objUser.username) && a.password.Equals(objUser.password)).FirstOrDefault();
+                    if (usuario_confirmado != null)
                     {
-                        Session["Id"] = obj.Id.ToString();
-                        Session["username"] = obj.nombres.ToString();
+                        //cambié las dos sesiones por una sola 
+                        Session["Usuario"] = usuario_confirmado;
+                        FormsAuthentication.SetAuthCookie(usuario_confirmado.username, false);
+
                         return RedirectToAction("Index","Home");
                     }
                 }
@@ -84,7 +88,9 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         public ActionResult Salir()
         {
             Session.Abandon();
-            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            //Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             return RedirectToAction("", "Home");
             //ModelState.AddModelError("", "Sesión Cerrada");
         }
@@ -103,6 +109,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 using (StoreContext context = new StoreContext())
                 {
                     usuario.IdRol = 2;
+                   // usuario.password = Hash.EncriptarPassword(usuario.password);
                     context.Usuarios.Add(usuario);
                     context.SaveChanges();
                     return RedirectToAction("Login");

@@ -155,6 +155,7 @@
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sources\Hash.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\css\bootstrap-responsive.min.css" />
