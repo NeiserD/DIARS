@@ -5,14 +5,23 @@
 }
 <style>
     tbody {
-    color:rgba(0, 0, 0, 0.75);
+        color: rgba(0, 0, 0, 0.75);
     }
 </style>
 <h2>Lista de Productos</h2>
 
+<div>
+    <!--start-top-serch-->
+<div id="search" class="text-left">
+    <input type="text" style="width:600px" placeholder="Buscar aquí..." />
+    <button type="submit"  style="width:40px" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+</div>
+<!--close-top-serch-->
+</div>
+
 <table class="table">
-    <thead >
-        <tr >
+    <thead>
+        <tr>
             <th>Id</th>
             <th>Nombre del Producto</th>
             <th>Fecha de Registro</th>
@@ -29,27 +38,27 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.nombre</td>
-            <td>@item.fecha</td>
-            <td>@item.precio</td>
-            <td>@item.idCategoria</td>
-            <td>@item.stock</td>
-            <td>@item.isActive</td>
-            <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
-            <td>
-                <a class="btn btn-outline-success" href="/Producto/Editar?ID=@item.Id">Editar</a>
-                <a class="btn btn-outline-success" href="/Producto/Eliminar?ID=@item.Id">Eliminar</a>
-            </td>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.nombre</td>
+                <td>@item.fecha</td>
+                <td>@item.precio</td>
+                <td>@item.idCategoria</td>
+                <td>@item.stock</td>
+                <td>@item.isActive</td>
+                <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
+                <td>
+                    <a class="btn btn-outline-success" href="/Producto/Editar?ID=@item.Id">Editar</a>
+                    <a class="btn btn-outline-success" href="/Producto/Eliminar?ID=@item.Id">Eliminar</a>
+                </td>
 
-            @*@if (ViewBag.usuario != null)
-        {
-            <td><a class="btn btn-outline-success" href="/Producto/Editar">Editar</a></td>
-            <td><a class="btn btn-outline-danger"href="/Producto/Editar">Eliminar</a></td>
-            @*<td><a href="/Pokemon/Capturar?idPokemon=@item.Id&idUsuario=@ViewBag.usuario&tipo=2">Atrapar con superball</a></td>
-        }*@
-        </tr>
+                @*@if (ViewBag.usuario != null)
+                    {
+                        <td><a class="btn btn-outline-success" href="/Producto/Editar">Editar</a></td>
+                        <td><a class="btn btn-outline-danger"href="/Producto/Editar">Eliminar</a></td>
+                        @*<td><a href="/Pokemon/Capturar?idPokemon=@item.Id&idUsuario=@ViewBag.usuario&tipo=2">Atrapar con superball</a></td>
+                    }*@
+            </tr>
 
         }
 
