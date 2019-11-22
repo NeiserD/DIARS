@@ -280,3 +280,5 @@ C:\Users\elvis\Documents\UPN\Ciclo8\Diars\Proyecto 3\DIARS\DIARS_PROYECTO_FINAL\
 C:\Users\elvis\Documents\UPN\Ciclo8\Diars\Proyecto 3\DIARS\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.csproj.CopyComplete
 C:\Users\elvis\Documents\UPN\Ciclo8\Diars\Proyecto 3\DIARS\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.dll
 C:\Users\elvis\Documents\UPN\Ciclo8\Diars\Proyecto 3\DIARS\DIARS_PROYECTO_FINAL\obj\Debug\DIARS_PROYECTO_FINAL.pdb
+C:\Users\elvis\Documents\UPN\Ciclo8\Diars\Proyecto 3\DIARS\DIARS_PROYECTO_FINAL\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\elvis\Documents\UPN\Ciclo8\Diars\Proyecto 3\DIARS\DIARS_PROYECTO_FINAL\bin\System.Security.Cryptography.Primitives.dll

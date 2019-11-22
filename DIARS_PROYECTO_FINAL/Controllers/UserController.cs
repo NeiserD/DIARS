@@ -59,6 +59,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            if (Session["Usuario"] != null) return View ("Producto", "Index");
             return View(new Usuario());
         }
 
@@ -84,7 +85,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             validarambos(objUser);
             return View(objUser);
         }
-        
+        [Authorize]
         public ActionResult Salir()
         {
             Session.Abandon();
@@ -103,19 +104,31 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpPost]
         public ActionResult Registrar(Usuario usuario)
         {
-            validarUsuarios(usuario);
+            validarCampos(usuario);
+            validar_campos_unicosbd(usuario);
+
             if (ModelState.IsValid)
             {
                 using (StoreContext context = new StoreContext())
                 {
+
                     usuario.IdRol = 2;
-                   // usuario.password = Hash.EncriptarPassword(usuario.password);
+                    usuario.password = Hash.ComputeSha256Hash(usuario.password);
                     context.Usuarios.Add(usuario);
                     context.SaveChanges();
                     return RedirectToAction("Login");
                 }
             }
             return View(usuario);
+        }
+        public void validar_campos_unicosbd(Usuario usuario) {
+            StoreContext context = new StoreContext();
+
+            var Isusername = context.Usuarios.Where(a => a.username == usuario.username).FirstOrDefault();
+            if (Isusername != null) ModelState.AddModelError("validation_de_username", "El nombre ingresado ya está en uso");
+
+            var IsMail = context.Usuarios.Where(a => a.email == usuario.email).FirstOrDefault();
+            if (IsMail != null) ModelState.AddModelError("validation_de_username", "El nombre ingresado no existe");
         }
 
         public void validar(Usuario objUser)
@@ -138,7 +151,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             }
         }
 
-        public void validarUsuarios(Usuario usuario)
+        public void validarCampos(Usuario usuario)
         {
             if (usuario.nombres == null || usuario.nombres == "")
             {
