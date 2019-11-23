@@ -1,7 +1,25 @@
-﻿
-@{
-    ViewBag.Title = "ProfileDetails";
-}
+﻿@*<ul>
+        <li>Editar Perfil</li>
+        <li>Cambiar Contraseña </li>
+        <li>Salir</li>
+    </ul>*@
+<button id="editPerfile" class="btn btn-success">Editar perfil</button>
+<button id="ChangePassoword" class="btn btn-success">Cambiar Contraseña</button>
+<a class="btn btn-success" href="/User/Salir">Salir</a>
 
-<h2>ProfileDetails</h2>
+<div id="request">
 
+</div>
+<script>
+    $(document).ready(
+
+        $("#editPerfile").click(function () {
+
+            $.ajax("/User/changePassword").done(function (response) {
+                console.log(response)
+                $("#request").html(response)
+            }).
+
+        })
+    );
+</script>

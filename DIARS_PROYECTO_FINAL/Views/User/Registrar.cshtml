@@ -1,7 +1,30 @@
 ﻿@model DIARS_PROYECTO_FINAL.Models.Usuario
 @{
     ViewBag.Title = "Registrar";
+    Layout = null;
 }
+
+<link href="~/Content/Admin/css/login.css" rel="stylesheet" />
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/css/Estilos.css" rel="stylesheet" />
+
+<!-- Slick -->
+<link type="text/css" rel="stylesheet" href="~/Content/css/slick.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/css/slick-theme.css" />
+
+<!-- nouislider -->
+<link type="text/css" rel="stylesheet" href="~/Content/css/nouislider.min.css" />
+
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="~/Content/css/style.css" />
+
 <style>
     strong {
         color: rgba(255, 0, 0, 0.72);
@@ -10,9 +33,11 @@
     label {
         color: rgba(248, 245, 245, 0.77);
     }
+
     .a {
         color: rgba(248, 245, 245, 0.77);
     }
+
     .alto {
         height: 100%;
     }
@@ -25,7 +50,7 @@
         <div class="col-md-6">
             <div class="login-wrap ">
                 <div style="height:870px" class="login-html alto">
-                    <input id="tab-1" type="radio" name="tab" class="sign-in " ><label for="tab-1" class="tab"><a class="a" href="/User/Login">Iniciar Sesión</a></label>
+                    <input id="tab-1" type="radio" name="tab" class="sign-in "><label for="tab-1" class="tab"><a class="a" href="/User/Login">Iniciar Sesión</a></label>
                     <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab"> <a class="a" href="/User/Registrar"> Registrarse</a></label>
                     <div class="login-form  " role="menu">
                         <div class="sign-in-htm">
@@ -42,9 +67,9 @@
                                         <strong>@Html.ValidationMessage("password")</strong>
                                     </div>
                                     @*<div class="group">
-                                            <input id="check" type="checkbox" class="check">
-                                            <label for="check"><span class="icon"></span>Acepto recibir notificaciones</label>
-                                        </div>*@
+                    <input id="check" type="checkbox" class="check">
+                    <label for="check"><span class="icon"></span>Acepto recibir notificaciones</label>
+                </div>*@
                                     <a class="btn btn-dark" style="color:white" href="/Home">¿Olvido su contraseña?</a>
                                     <div>
                                         <strong>@Html.ValidationMessage("invalid") </strong>
@@ -55,6 +80,9 @@
                                     </div>
                                 </fieldset>
                             </form>
+                            <div class="group">
+                                <a class=" btn button" ></a>
+                            </div>
                             <div class="hr"></div>
                             <div> </div>
                         </div>
@@ -77,10 +105,10 @@
                                     <strong>@Html.ValidationMessage("DNI")</strong>
                                 </div>
                                 @*<div class="group">
-                                    <label for="pass" class="label">Celular</label>
-                                    <input id="pass" name="celular" type="text" class="input">
-                                    <strong>@Html.ValidationMessage("Celular")</strong>
-                                </div>*@
+                                        <label for="pass" class="label">Celular</label>
+                                        <input id="pass" name="celular" type="text" class="input">
+                                        <strong>@Html.ValidationMessage("Celular")</strong>
+                                    </div>*@
                                 <div class="group">
                                     <label for="pass" class="label">Email</label>
                                     <input id="pass" name="email" type="text" class="input">

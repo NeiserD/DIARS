@@ -10,7 +10,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class DireccionController : Controller
     {
-        StoreContext context = new StoreContext();
+        StoreContext context =  StoreContext.getInstance();
         public ActionResult Index()
         {
             var direcciones = context.Direccioness.ToList();    

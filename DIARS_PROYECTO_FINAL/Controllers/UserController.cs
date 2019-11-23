@@ -13,21 +13,23 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class UserController : Controller
     {
-        public StoreContext context = new StoreContext();
+        public StoreContext context = StoreContext.getInstance();
         public ActionResult Index()
         {
-            
-                var users = context.Usuarios.ToList();
-                return View(users);
+            var users = context.Usuarios.ToList();
+            return View(users);
         }
 
+        [Authorize]
         [HttpGet]
-        public ActionResult ProfileDetails(int ID)
+        public ActionResult ProfileDetails()
         {
-            var users = context.Usuarios.Where(a => a.Id == ID).FirstOrDefault();
-            ViewBag.Id = users.Id;
-            return View(users);
-            
+
+            if (Session["Usuario"] == null) return RedirectToAction("Index");
+
+            var usuario_loggeado = (Usuario)Session["Usuario"];    
+            var users = context.Usuarios.Where(a => a.Id == usuario_loggeado.Id).FirstOrDefault();
+            return View(users);   
         }
 
         [HttpPost]
@@ -42,18 +44,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(usuario);
         }
 
-        
-
         [HttpGet]
         public ActionResult Eliminar(int ID)
         {
-            using (StoreContext context = new StoreContext())
-            {
-                Usuario usuario = context.Usuarios.Where(x => x.Id == ID).First();
-                context.Usuarios.Remove(usuario);
-                context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Usuario usuario = context.Usuarios.Where(x => x.Id == ID).First();
+            context.Usuarios.Remove(usuario);
+            context.SaveChanges();
+            return RedirectToAction("Index");
+            
         }
 
         [HttpGet]
@@ -69,17 +67,17 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             validar(objUser);
             if (ModelState.IsValid)
             {
-                using (StoreContext db = new StoreContext())
-                {
-                    var usuario_confirmado = db.Usuarios.Where(a => a.username.Equals(objUser.username) && a.password.Equals(objUser.password)).FirstOrDefault();
-                    if (usuario_confirmado != null)
-                    {
-                        //cambié las dos sesiones por una sola 
-                        Session["Usuario"] = usuario_confirmado;
-                        FormsAuthentication.SetAuthCookie(usuario_confirmado.username, false);
+                var contrasenna_hasheado = Hash.ComputeSha256Hash( objUser.password);
+                var usuario_confirmado = context.Usuarios.Where(a => a.username.Equals(objUser.username) && a.password.Equals(contrasenna_hasheado)).FirstOrDefault();
 
-                        return RedirectToAction("Index","Home");
-                    }
+
+                if (usuario_confirmado != null)
+                {
+                    //cambié las dos sesiones por una sola 
+                    Session["Usuario"] = usuario_confirmado;
+                    FormsAuthentication.SetAuthCookie(usuario_confirmado.username, false);
+                    return RedirectToAction("Index","Home");
+                    
                 }
             }
             validarambos(objUser);
@@ -91,9 +89,8 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             Session.Abandon();
             FormsAuthentication.SignOut();
             Session.Clear();
-            //Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             return RedirectToAction("", "Home");
-            //ModelState.AddModelError("", "Sesión Cerrada");
+         
         }
         [HttpGet]
         public ViewResult Registrar()
@@ -109,28 +106,41 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 
             if (ModelState.IsValid)
             {
-                using (StoreContext context = new StoreContext())
-                {
+                
 
-                    usuario.IdRol = 2;
-                    usuario.password = Hash.ComputeSha256Hash(usuario.password);
-                    context.Usuarios.Add(usuario);
-                    context.SaveChanges();
-                    return RedirectToAction("Login");
-                }
+                usuario.IdRol = 2;
+                usuario.password = Hash.ComputeSha256Hash(usuario.password);
+                context.Usuarios.Add(usuario);
+                context.SaveChanges();
+                return RedirectToAction("Login");
+                
             }
             return View(usuario);
         }
-        public void validar_campos_unicosbd(Usuario usuario) {
-            StoreContext context = new StoreContext();
 
+        public PartialViewResult changePassword() {
+
+            return PartialView();
+        }
+        public PartialViewResult EditProfile() {
+            return PartialView();
+        }
+
+        public void validar_campos_unicosbd(Usuario usuario) {
+         
+            //valida username 
             var Isusername = context.Usuarios.Where(a => a.username == usuario.username).FirstOrDefault();
             if (Isusername != null) ModelState.AddModelError("validation_de_username", "El nombre ingresado ya está en uso");
 
+            //valida email 
             var IsMail = context.Usuarios.Where(a => a.email == usuario.email).FirstOrDefault();
-            if (IsMail != null) ModelState.AddModelError("validation_de_username", "El nombre ingresado no existe");
-        }
+            if (IsMail != null) ModelState.AddModelError("validation_de_mail", "El correo ingresado ya está en uso");
 
+            //valida dni
+            var IsDni = context.Usuarios.Where(a => a.dni == usuario.dni).FirstOrDefault();
+            if (IsDni != null) ModelState.AddModelError("validation_de_dni", "El DNI ingresado ya está en uso");
+
+        }
         public void validar(Usuario objUser)
         {
             if (objUser.username == null || objUser.username == " ")
@@ -150,7 +160,6 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 ModelState.AddModelError("invalid", "Usuario y/o Contraseña incorrecta");
             }
         }
-
         public void validarCampos(Usuario usuario)
         {
             if (usuario.nombres == null || usuario.nombres == "")
