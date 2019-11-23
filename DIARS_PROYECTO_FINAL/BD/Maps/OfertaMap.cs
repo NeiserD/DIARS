@@ -13,6 +13,12 @@ namespace DIARS_PROYECTO_FINAL.BD.Maps
         {
             ToTable("Oferta");
             HasKey(o=>o.id);
+
+
+
+                
         }
+
+        
     }
 }

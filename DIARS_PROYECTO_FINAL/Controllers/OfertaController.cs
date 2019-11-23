@@ -16,18 +16,29 @@ namespace DIARS_PROYECTO_FINAL.Controllers
        
         public ActionResult Index()
         {
-            var oferta = context.ofertas.ToList();
+            var oferta = context.Ofertas.ToList();
+            return View(oferta);
+        }
+        //Ajax for home index
+        public ActionResult Ofertas()
+        {
+            var oferta = context.Ofertas.ToList();
             return View(oferta);
         }
 
-        // GET: Oferta/Create
-        
+        public ActionResult Especificaciones(int ID)
+        {
+            Oferta oferta= context.Ofertas.Find(ID);
+
+            return View(oferta);
+        }
+
         public ActionResult Crear()
         {
             return View(new Oferta());
         }
 
-        // POST: Oferta/Create
+      
        
         [HttpPost]
         public ActionResult Crear(Oferta oferta, HttpPostedFileBase file)
@@ -43,7 +54,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             if (ModelState.IsValid)
             {
                 oferta.fechaInicio = DateTime.Now;
-                context.ofertas.Add(oferta);
+                context.Ofertas.Add(oferta);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -55,7 +66,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         public ActionResult Editar(int ID)
         {
 
-            var oferta = context.ofertas.Where(o=>o.id== ID).First();
+            var oferta = context.Ofertas.Where(o=>o.id== ID).First();
 
             return View(oferta);
         }
@@ -91,8 +102,8 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         
         public ActionResult Eliminar(int ID)
         {
-            Oferta oferta = context.ofertas.Where(x=>x.id== ID).First();
-            context.ofertas.Remove(oferta);
+            Oferta oferta = context.Ofertas.Where(x=>x.id== ID).First();
+            context.Ofertas.Remove(oferta);
             context.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+
+<!-- Google font -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+
+<!-- Slick -->
+<link type="text/css" rel="stylesheet" href="~/Content/css/slick.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/css/slick-theme.css" />
+
+<!-- nouislider -->
+<link type="text/css" rel="stylesheet" href="~/Content/css/nouislider.min.css" />
+
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="~/Content/css/style.css" />
+
+
+
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row focus">
+                    <div class="products-tabs">
+                        <div id="tab2" class="tab-pane fade in active">
+                            <div  class="products-slick" data-nav="#slick-nav-1">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-lg-2">
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img style="width:200px;height:250px;padding:35px" src="@item.imagen" />
+                                                <div class="product-label">
+                                                    <span class="sale">-30%</span>
+                                                    <span class="new">Nuevo</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#">@item.nombre</a></h3>
+                                                <h4 class="product-price">S/ 980.00 <del class="product-old-price">S/ 990.00</del></h4>
+
+                                                <div class="product-btns">
+                                                    <a class="quick-view" href="/Oferta/Especificaciones?ID=@item.id">Comprar <i class="fa fa-eye"></i><span class="tooltipp">Vista rápida</span></a>
+
+                                                </div>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Agregar al carrito</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="div">
+
+</div>
+
+
+
+<script>
+    $("#clic").click(function (e) {
+        $.ajax("/Oferta/Crear").done(function (res) {
+            $("#div").modal(res);
+        })
+    });
+</script>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Content/js/slick.min.js"></script>
+<script src="~/Content/js/nouislider.min.js"></script>
+<script src="~/Content/js/jquery.zoom.min.js"></script>
+<script src="~/Content/js/main.js"></script>

@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     <title>Administrar-PolonyStore</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/Content/Admin/css/bootstrap.min.css" rel="stylesheet" />
@@ -14,6 +19,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
+   
     <!--Header-part-->
     <div id="header">
         <h1><a href="dashboard.html">Matrix Admin-</a></h1>
@@ -118,28 +125,30 @@
         <div class="container-fluid">
             <div class="quick-actions_homepage">
                 <ul class="quick-actions">
-                    <li style="height:30px" class="bg_ls"> <a href="/Producto/Index"> <i class="icon-shopping-cart"></i> Productos </a> </li>
-                    <li style="height:30px" class="bg_lo span3"> <a href="/Oferta/Index"> <i class="icon-certificate"></i> <span class="label label-important">Ofertas</span> Ofertas</a> </li>
+                    <li id="btn" style="height:30px" class="bg_ls"> <a > <i class="icon-shopping-cart"></i> Productos </a> </li>
+                    <li style="height:30px" class="bg_lo span3"> <a > <i class="icon-certificate"></i> <span class="label label-important">Ofertas</span> Ofertas</a> </li>
                     <li style="height:30px" class="bg_ly"> <a href="/Categoria/Index"> <i class="icon-inbox"></i><span class="label label-success">101</span> Categorías </a> </li>
                     <li style="height:30px" class="bg_lg"> <a href="/Metodo_Pago/Index"> <i class="icon-credit-card"></i>Métodos de Pago</a> </li>
-                    @*<li class="bg_ls"> <a href="grid.html"> <i class="icon-facetime-video"></i> Full width</a> </li>
-                        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-                        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-file"></i> Buttons</a> </li>
-                        <li class="bg_lb"> <a href="interface.html"> <i class="icon-bolt"></i>Elements</a> </li>
+                        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-th-list"></i> Usuarios</a> </li>
+                        @*<li class="bg_lb"> <a href="interface.html"> <i class="icon-bolt"></i>Elements</a> </li>
                         <li class="bg_lg"> <a href="calendar.html"> <i class="icon-camera"></i> Calendar</a> </li>
                         <li class="bg_lr"> <a href="error404.html"> <i class="icon-arrow-right"></i> Error</a> </li>*@
                 </ul>
+                
             </div>
             <!--End-Action boxes-->
 
             <div class="container">
                 <br />
                 @RenderBody()
+                
             </div>
+           
             <!--End-Chart-box-->
             <hr />
         </div>
     </div>
+
     <!--end-main-container-part-->
     <!--Footer-part-->
 
@@ -171,6 +180,17 @@
     <script src="~/Content/Admin/js/jquery.dataTables.min.js"></script>
     <script src="~/Content/Admin/js/matrix.tables.js"></script>
 
+    @*<script>
+        // Evento que envía una petición Ajax al servidor
+       
+        $("#index").click(function buscar(e) {
+            var busqueda = $("#index").val();
+            $.ajax({ url: "/Oferta/Index"}).done(function (res) {
+                $("#tabla").html(res);
+            });
+        });
+    </script>*@
+
     <script type="text/javascript">
         // This function is called from the pop-up menus to transfer to
         // a different page. Ignore if the value returned is a null string:
@@ -195,6 +215,6 @@
             document.gomenu.selector.selectedIndex = 2;
         }
     </script>
-  
+ 
 </body>
 </html>

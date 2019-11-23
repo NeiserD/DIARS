@@ -33,7 +33,19 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="~/Content/css/style.css" />
 
-
+    <style>
+        .ir-arriba {
+            display: none;
+            padding: 10px;
+            background: #000000;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER -->
@@ -186,7 +198,7 @@
     </header>
     <!-- /HEADER -->
     <!-- NAVIGATION -->
-    <nav id="navigation">
+    <nav id="navigation" role="navigation" class="header-navbar navbar-expand-sm navbar navbar-with-menu fixed-top navbar-dark navbar-shadow navbar-border ">
         <!-- container -->
         <div class="container">
             <!-- responsive-nav -->
@@ -195,9 +207,9 @@
                 <!----------------------------------------------------------------------MENU---------------------------------------------------------------->
                 <ul class="main-nav nav navbar-nav">
                     <li class="active"><a href="http://localhost:49852/">Home</a></li>
-                    <li><a href="/Metodo_Pago">Categorías</a></li>
-                    <li><a href="/Categoria">Ofertas</a></li>
-                    <li><a href="/Categoria">Ofertas</a></li>
+                    <li><a class="navbar-brand" href="/Metodo_Pago">Categorías</a></li>
+                    <li><a class="navbar-brand" href="/Categoria">Ofertas</a></li>
+                    <li><a class="navbar-brand" href="/Categoria">Ofertas</a></li>
                 </ul>
                 <!-- /NAV -->
             </div>
@@ -207,9 +219,11 @@
     </nav>
     <!--------------------------------------------------------------------------------------------------------------------------------->
     <div class="container">
-        <br />
         @RenderBody()
         <br />
+
+        <span class="ir-arriba"><i class="fa fa-arrow-circle-o-up"></i></span>
+        
 
     </div>
     <!-- NEWSLETTER -->
@@ -348,5 +362,24 @@
                 form.addClass('was-validated');
             });
         </script>*@
+    <script>
+        $(document).ready(function () {
+
+            $('.ir-arriba').click(function () {
+                $('body, html').animate({
+                    scrollTop: '0px'
+                }, 300);
+            });
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 0) {
+                    $('.ir-arriba').slideDown(300);
+                } else {
+                    $('.ir-arriba').slideUp(300);
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>

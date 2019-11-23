@@ -20,7 +20,7 @@ namespace DIARS_PROYECTO_FINAL.Models
         public string marca { get; set; }
         public string modelo { get; set; }
         public int talla { get; set; }
-
+        
 
     }
 }

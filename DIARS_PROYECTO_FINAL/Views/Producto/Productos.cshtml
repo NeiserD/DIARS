@@ -1,13 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Productos";
+    Layout = null;
 }
-<style>
-    tbody {
-        color: rgba(0, 0, 0, 0.75);
-    }
-</style>
+
 <h2>Lista de Productos</h2>
 
 <div id="index">
@@ -18,10 +14,8 @@
     </div>
     <!--close-top-serch-->
 </div>
-<div>
-    <a id="btn">Crear</a>
-</div>
-<table class="table" id="div">
+
+<table class="table" id="tabla">
     <thead>
         <tr>
             <th>Id</th>
@@ -68,11 +62,3 @@
 
 </table>
 
-
-<script>
-    $("#btn").click(function (e) {
-        $.ajax("/Producto/Crear").done(function (res) {
-            $("#div").html(res);
-        })
-    });
-</script>

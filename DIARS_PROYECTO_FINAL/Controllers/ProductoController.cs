@@ -58,10 +58,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
 
         // GET: Producto/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+      
 
         // POST: Producto/Edit/5
         [HttpPost]
