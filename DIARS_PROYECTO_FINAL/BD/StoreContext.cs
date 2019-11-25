@@ -16,6 +16,7 @@ namespace DIARS_PROYECTO_FINAL.BD
         public IDbSet<Usuario>  Usuarios{ get; set; }
         public IDbSet<Producto> Productos { get; set; }
         public IDbSet<Direcciones> Direccioness{ get; set; }
+        public IDbSet<Carousel> Carousels{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,6 +27,7 @@ namespace DIARS_PROYECTO_FINAL.BD
             modelBuilder.Configurations.Add(new UsuarioMap());
             modelBuilder.Configurations.Add(new ProductoMap());
             modelBuilder.Configurations.Add(new DireccionesMap());
+            modelBuilder.Configurations.Add(new CarouselMap());
         }
     }
     
