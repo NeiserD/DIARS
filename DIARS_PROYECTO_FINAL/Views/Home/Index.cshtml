@@ -92,10 +92,7 @@
                             <p class="precio">S/ @item.precio</p>
                             <div class="overlay">
                                 <h2>@item.nombre</h2>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
+                                <br /><br /><br /><br />
                                 <a class="info" href="/Producto/Especificaciones?ID=@item.Id">Vista Rápida</a>
 
                                 @*<a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span style="color:white" class="tooltipp">Vista rápida</span></a>*@
@@ -112,7 +109,7 @@
 
                     </div>
                     <div class="product-body">
-                        <button class="btn btn-outline-dark" style="background:black;color:white"><i class="fa fa-shopping-cart"></i> Agregar al Carrito</button>
+                        <button data-carrito="@item.Id" onclick="addCarrito(@item.Id)" class="btn btn-outline-dark" style="background:black;color:white"><i class="fa fa-shopping-cart"></i> Agregar al Carrito</button>
                     </div>
                 </div>
             </div>
@@ -221,13 +218,23 @@
             $("#car").html(res);
         })
     });
-</script>
 
-<script>
     $("#btn").html(function (e) {
         $.ajax("/Oferta/Ofertas").done(function (res) {
             $("#div").html(res);
         })
     });
+
+
+    function addCarrito(valor) {
+       
+        $.ajax(`/user/addCarrito?id=${valor}&mcantidad=1`)
+            .done(function (e) {
+                if (e == "ok") alert("Producto agregado ")
+                else {
+                    alert(e)
+                }
+            })  
+    }
 </script>
 

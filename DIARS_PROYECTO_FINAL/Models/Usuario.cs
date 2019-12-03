@@ -7,6 +7,11 @@ namespace DIARS_PROYECTO_FINAL.Models
 {
     public class Usuario
     {
+        public Usuario()
+        {
+            ListaCarritos = new List<Carrito>();
+        }
+
         public int Id { get; set; }
         public string email { get; set; }
         public string password { get; set; }
@@ -17,5 +22,7 @@ namespace DIARS_PROYECTO_FINAL.Models
         public string apellidos { get; set; }
         public string celular { get; set; }
         public string TokenRecovery { get; set; }
+
+       public  List <Carrito> ListaCarritos { get; set; }
     }
 }

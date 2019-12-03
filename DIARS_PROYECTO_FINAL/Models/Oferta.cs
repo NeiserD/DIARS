@@ -7,6 +7,10 @@ namespace DIARS_PROYECTO_FINAL.Models
 {
     public class Oferta
     {
+     /*   public Oferta()
+        {
+            precioNormal = 1;
+        }*/
         public int id { get; set; }
         public string nombre { get; set; }
         public DateTime fechaInicio{ get; set; }

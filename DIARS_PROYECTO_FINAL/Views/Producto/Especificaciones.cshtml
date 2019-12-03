@@ -153,7 +153,7 @@
                                         <span class="glyphicon glyphicon-minus"></span>
                                     </button>
                                 </span>
-                                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="0" min="1" max="100">
+                                <input type="text" id="quantity" data-id="@Model.Id" name="quantity" class="form-control input-number" value="0" min="1" max="100">
                                 <span class="input-group-btn">
                                     <button style="height:34px" type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <span class="glyphicon glyphicon-plus"></span>
@@ -167,10 +167,14 @@
                     <br>
                     <br />
                 </div>
-                    <div>
-                        <a class="btn btn-primary" href="/Compra/Crear">Agregar a la bolsa</a>
-                    </div>
+                <div>
+                    <a class="btn btn-primary" id="btn-comprar" href="/Compra/Crear">Comprar</a>
                 </div>
+
+                <div>
+                    <a class="btn btn-primary" id="btn-agregar" href="/User/CarritoCompras">Agregar al carrito</a>
+                </div>
+            </div>
             </div>
             
 
@@ -273,9 +277,20 @@
 
     });
 
-    /*******************************
-  * ACCORDION WITH TOGGLE ICONS
-  *******************************/
+    $('#btn-agregar').click(function () {
+       let cantidad = $("#quantity").val();
+        let id = $("#quantity").data("id");
+        alert(cantidad)
+        alert(id)
+        $.ajax(`/user/addCarrito?id=${id}&mcantidad=${cantidad}`)
+            .done(function (e) {
+                if (e == "ok") alert("Producto agregado ")
+                else {
+                    alert(e)
+                }
+            })  
+
+    })
     function toggleIcon(e) {
         $(e.target)
             .prev('.panel-heading')

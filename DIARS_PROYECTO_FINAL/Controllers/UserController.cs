@@ -16,6 +16,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class UserController : Controller
     {
+        String urlDomain = "http://localhost:49852/";
         public StoreContext context = StoreContext.getInstance();
 
 
@@ -76,7 +77,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             if (ModelState.IsValid)
             {
                 var contrasenna_hasheado = Hash.ComputeSha256Hash( objUser.password);
-                var usuario_confirmado = context.Usuarios.Where(a => a.username.Equals(objUser.username) && a.password.Equals(contrasenna_hasheado)).FirstOrDefault();
+                var usuario_confirmado = context.Usuarios.Include(a=>a.ListaCarritos).Where(a => a.username.Equals(objUser.username) && a.password.Equals(contrasenna_hasheado)).FirstOrDefault();
 
 
                 if (usuario_confirmado != null)
@@ -150,16 +151,12 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return PartialView();
         }
         [Authorize]
-        [HttpGet]
         public String  VerifiPassword(string pass)
         {
             var usuario = (Usuario)Session["Usuario"];
             return (usuario.password == Hash.ComputeSha256Hash(pass))?"ok":"error";
 
         }
-      
-
-        [HttpGet]
         [Authorize]
         public PartialViewResult EditProfile() {
             var usuario = (Usuario)Session["Usuario"];
@@ -199,6 +196,22 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             }
         }
 
+        [Authorize]
+        public String addCarrito(int id,int mcantidad) {
+            try {
+                var usuario = (Usuario)Session["Usuario"];
+                context.Carritos.Add(new Carrito { IdUsuario = usuario.Id, cantidad = mcantidad, IdProducto = id });
+                context.SaveChanges();
+                return "ok";
+            } catch (Exception e) { return "error"; }
+            
+
+        }
+        [Authorize]
+        public ActionResult CarritoCompras() {
+            var usuario = (Usuario)Session["Usuario"];
+            return View(context.Carritos.Include(a=>a.Producto).Where(a=>a.IdUsuario ==usuario.Id));
+        }
 
         //valida que locs campos sean unicos 
         public void validar_campos_unicosbd(Usuario usuario) {
@@ -352,13 +365,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         //para encriptar el token 
         public static string GetSHA256(string str)
         {
-            SHA256 sha256 = SHA256Managed.Create();
+          /*  SHA256 sha256 = SHA256Managed.Create();
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] stream = null;
             StringBuilder sb = new StringBuilder();
             stream = sha256.ComputeHash(encoding.GetBytes(str));
-            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
-            return sb.ToString();
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);*/
+
+            return Hash.ComputeSha256Hash(str);
         }
 
         //enviar correros 

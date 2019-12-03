@@ -11,13 +11,16 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class CarouselController : Controller
     {
-        public StoreContext context = new StoreContext();
+        public StoreContext context = StoreContext.getInstance();
         public ActionResult Index()
         {
             var carousel = context.Carousels.ToList();
             return View(carousel);
         }
 
+        public ActionResult Comprar() {
+            return View();
+        }
         public ActionResult Crear() {
             return View();
         }

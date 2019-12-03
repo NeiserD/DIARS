@@ -13,13 +13,17 @@
     @RenderSection("scripts", required: false)
     @using DIARS_PROYECTO_FINAL.Models
     @{
+
         bool isNotLogueado = true ;
         Usuario usuario = (Usuario)Session["Usuario"];
+        int countProductos;
         if (usuario == null) {
             usuario = new Usuario();
             usuario.username = "Identifícate";
             isNotLogueado = false ;
+            countProductos = 0;
         }
+      countProductos = usuario.ListaCarritos.Count;
 
 
     }
@@ -163,7 +167,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Tu compra</span>
-                                    <div class="qty">0</div>
+                                    <div class="qty">@countProductos</div>
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="cart-list">

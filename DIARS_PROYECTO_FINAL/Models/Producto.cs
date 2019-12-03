@@ -7,6 +7,11 @@ namespace DIARS_PROYECTO_FINAL.Models
 {
     public class Producto
     {
+        public Producto()
+        {
+            ListaCarritos = new List<Carrito>();
+        }
+
         public int Id { get; set; }
         public string nombre { get; set; }
         public DateTime fecha { get; set; }
@@ -20,7 +25,9 @@ namespace DIARS_PROYECTO_FINAL.Models
         public string marca { get; set; }
         public string modelo { get; set; }
         public int talla { get; set; }
-        
+
+
+        public List<Carrito> ListaCarritos { get; set; }
 
     }
 }

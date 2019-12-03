@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DIARS_PROYECTO_FINAL.Models.Carrito>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>Nombre</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>@item.Producto.nombre</td>
+    <td>@item.Producto.imagen</td>
+    <td>@item.cantidad</td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>
+}
+
+</table>
