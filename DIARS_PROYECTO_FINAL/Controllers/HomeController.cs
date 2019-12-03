@@ -10,7 +10,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class HomeController : Controller
     {
-        public StoreContext context = new StoreContext();
+        public StoreContext context = StoreContext.getInstance();
 
         public ActionResult Index()
         {

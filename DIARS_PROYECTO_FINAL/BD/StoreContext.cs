@@ -10,6 +10,16 @@ namespace DIARS_PROYECTO_FINAL.BD
 {
     public class StoreContext:DbContext
     {
+        private static StoreContext  context;
+        private StoreContext() { }
+        public static StoreContext getInstance()
+        {
+            if (context == null ) {
+                context = new StoreContext();
+            }
+            return context;
+            
+        }
         public IDbSet<Categoria> Categorias { get; set; }
         public IDbSet<MetodoPago> metodoPagos { get; set; }
         public IDbSet<Oferta> ofertas { get; set; }

@@ -11,7 +11,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 {
     public class Metodo_PagoController : Controller
     {
-        StoreContext context = new StoreContext();
+        StoreContext context = StoreContext.getInstance();
         [Authorize]
         public ActionResult Index()
         {

@@ -11,6 +11,18 @@
     @Scripts.Render("~/bundles/bootstrap")
 
     @RenderSection("scripts", required: false)
+    @using DIARS_PROYECTO_FINAL.Models
+    @{
+        bool isNotLogueado = true ;
+        Usuario usuario = (Usuario)Session["Usuario"];
+        if (usuario == null) {
+            usuario = new Usuario();
+            usuario.username = "Identifícate";
+            isNotLogueado = false ;
+        }
+
+
+    }
 
     <link href="~/Content/Admin/css/login.css" rel="stylesheet" />
     <!-- Google font -->
@@ -35,11 +47,11 @@
 
 
 </head>
-<body>
+<body >
     <!-- HEADER -->
     <header class="position-relative">
         <!-- TOP HEADER -->
-        <div id="top-header" class="position-relative">
+        <div id="top-header" class="position-relative" style="padding-right: 50px">
             <div class="row">
                 <div class="col-lg-1">
                 </div>
@@ -50,34 +62,43 @@
                         <li><a href="/Home/Map"><i class="fa fa-map-marker"></i> Av. Hoyos Rubios 1734</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 ">
                     <div class="row">
                         <fieldset style="color:white">
-                            @if (Session["username"] != null)
-                            {<text>
+                            
+                            <text>
                                     <div class="">
-                                        Bienvenido @Session["username"].ToString()
+                                        Bienvenido, @usuario.username 
                                         <br />
                                         <ul class="header-links pull-left">
                                             <li class="text-left">
-                                               
-                                                <a href="/User/ProfileDetails?ID=2"><i class="fa "></i> Ver Perfil</a>
-                                                
-                                                <a href="/User/Salir"><i class="fa "></i> Salir</a>
+                                                @if (isNotLogueado)
+                                                {
+                                                    <a href="/User/ProfileDetails"><i class="fa "></i> Ver Perfil</a>
+                                                    <a href="/User/Salir"><i class="fa "></i> Salir</a>
+                                                }
+
                                             </li>
                                         </ul>
                                     </div>
                             </text>
-                        }
+                        
                         </fieldset>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                
+                <div class="col align-self-end">
                     <ul class="header-links pull-right">
-                        <li><a href="/User/Login"><i class="fa fa-user">    </i> Iniciar Sesión</a></li>
-                        <li><a href="/User/Registrar"><i class="fa fa-user">    </i> Registrarse</a></li>
+                        @if (!isNotLogueado)
+                        {
+                            <li><a href="/User/Login"><i class="fa fa-user">    </i> Iniciar Sesión</a></li>
+                            <li><a href="/User/Registrar"><i class="fa fa-user">    </i> Registrarse</a></li>
+                        }
+
+
                     </ul>
                 </div>
+
                 <div class="col-lg-1">
                 </div>
             </div>
@@ -261,8 +282,8 @@
                         <div class="footer">
                             <h3 class="footer-title">Informacion</h3>
                             <ul class="footer-links">
-                                <li><a href="#">Conocenos</a></li>
-                                <li><a href="#">Contactenos</a></li>
+                                <li><a href="#">Conócenos</a></li>
+                                <li><a href="#">Contáctenos</a></li>
                                 <li><a href="#">Politica de privacidad</a></li>
                                 <li><a href="#">Politica de devolución</a></li>
                                 <li><a href="#">Terminos y condiciones</a></li>
