@@ -7,18 +7,12 @@ using System.Web;
 
 namespace DIARS_PROYECTO_FINAL.BD.Maps
 {
-    public class OfertaMap:EntityTypeConfiguration<Oferta>
+    public class CarouselMap:EntityTypeConfiguration<Carousel>
     {
-        public OfertaMap()
+        public CarouselMap()
         {
-            ToTable("Oferta");
-            HasKey(o=>o.id);
-
-
-
-                
+            ToTable("Carousel");
+            HasKey(a=>a.Id);
         }
-
-        
     }
 }

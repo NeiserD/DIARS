@@ -16,19 +16,28 @@ namespace DIARS_PROYECTO_FINAL.Controllers
        
         public ActionResult Index()
         {
-            var oferta = context.ofertas.ToList();
+            var oferta = context.Ofertas.ToList();
+            return View(oferta);
+        }
+        //Ajax for home index
+        public ActionResult Ofertas()
+        {
+            var oferta = context.Ofertas.ToList();
             return View(oferta);
         }
 
-        // GET: Oferta/Create
-        
+        public ActionResult Especificaciones(int ID)
+        {
+            Oferta oferta = context.Ofertas.Find(ID);
+
+            return View(oferta);
+        }
+
         public ActionResult Crear()
         {
             return View(new Oferta());
         }
 
-        // POST: Oferta/Create
-       
         [HttpPost]
         public ActionResult Crear(Oferta oferta, HttpPostedFileBase file)
         {
@@ -40,32 +49,35 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 file.SaveAs(ruta);
                 oferta.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
             }
+           
+            calcularOferta(oferta);
+
             if (ModelState.IsValid)
             {
+                //oferta.porcentajeOferta = ofertaFinal;
                 oferta.fechaInicio = DateTime.Now;
-                context.ofertas.Add(oferta);
+                context.Ofertas.Add(oferta);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(oferta);
         }
 
-        // GET: Oferta/Edit/5
-        
+
+
         public ActionResult Editar(int ID)
         {
 
-            var oferta = context.ofertas.Where(o=>o.id== ID).First();
+            var oferta = context.Ofertas.Where(o => o.id == ID).First();
 
             return View(oferta);
         }
 
-        // POST: Oferta/Edit/5
-        
+
+
         [HttpPost]
         public ActionResult Editar(Oferta oferta, HttpPostedFileBase file)
         {
-            
             ValidarOfer(oferta);
             if (ModelState.IsValid)
             {
@@ -74,25 +86,12 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 return RedirectToAction("Index");
             }
             return View(oferta);
-
-            //try
-            //{
-            //    context.Entry(oferta).State = EntityState.Modified;
-            //    context.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
         }
-
-        // GET: Oferta/Delete/5
         
         public ActionResult Eliminar(int ID)
         {
-            Oferta oferta = context.ofertas.Where(x=>x.id== ID).First();
-            context.ofertas.Remove(oferta);
+            Oferta oferta = context.Ofertas.Where(x => x.id == ID).First();
+            context.Ofertas.Remove(oferta);
             context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -101,7 +100,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         {
             if (oferta.nombre == null || oferta.nombre == "")
                 ModelState.AddModelError("Nombre", "El campo  es obligatorio");
-            if (oferta.fechaInicio== null)
+            if (oferta.fechaInicio == null)
                 ModelState.AddModelError("FechaInicio", "El campo  es obligatorio");
             if (oferta.fechaFin == null)
                 ModelState.AddModelError("FechaFin", "El campo  es obligatorio");
@@ -109,6 +108,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 ModelState.AddModelError("Descripcion", "El campo  es obligatorio");
 
         }
-
+        public int calcularOferta(Oferta oferta)
+        {
+            decimal pNormal = oferta.precioNormal;
+            decimal pOferta = oferta.precioOferta;
+            decimal porOferta = (pOferta * 100) / pNormal;
+            int porcenOferta = Convert.ToInt32(porOferta);
+            int ofertaFinal = 100 - porcenOferta;
+            return oferta.porcentajeOferta = ofertaFinal;
+        }
     }
 }

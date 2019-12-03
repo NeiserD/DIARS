@@ -46,16 +46,42 @@
     <div class="row">
         <div class="col-md-3">
 
-        </div>
-        <div class="col-md-6">
-            <div class="login-wrap">
-                <div class="login-html alto">
-                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab"> <a class="a" href="/User/Login"> Iniciar Sesión</a></label>
-                    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"><a class="a" href="/User/Registrar"> Registrarse</a></label>
-                    <div class="login-form " role="menu">
-                        <div class="sign-in-htm">
-                            <form action="/User/Login" method="post">
-                                <fieldset>
+            </div>
+            <div class="col-md-6">
+                <div class="login-wrap">
+                    <div  class="login-html alto">
+                        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab"> <a class="a" href="/User/Login"> Iniciar Sesión</a></label>
+                        <input id="tab-2" type="radio" name="tab"   class="sign-up"><label for="tab-2" class="tab"  ><a class="a"href="/User/Registrar"> Registrarse</a></label>
+                        <div class="login-form " role="menu">
+                            <div class="sign-in-htm">
+                                <form action="/User/Login" method="post">
+                                    <fieldset>
+                                        <div class="group">
+                                            <label for="user" class="label">Usuario</label>
+                                            <input id="user" type="text" autocomplete="off" class="input" value="@Model.username" name="username">
+                                            <strong>@Html.ValidationMessage("username")</strong>
+                                        </div>
+                                        <div class="group">
+                                            <label for="pass" class="label">Contraseña</label>
+                                            <input value="@Model.password" id="pass" type="password" autocomplete="off" class="input" data-type="password" name="password">
+                                            <strong>@Html.ValidationMessage("password")</strong>
+                                        </div>
+                                        <a class="btn btn-dark" style="color:white" href="/User/startRecovery">¿Olvido su contraseña?</a>
+                                        <div>
+                                            <strong>@Html.ValidationMessage("invalid") </strong>
+                                        </div>
+                                        <br />
+                                        <div class="group">
+                                            <input type="submit" class=" btn button" value="Login">
+                                        </div>
+                                    </fieldset>
+                                </form>
+                                <div class="hr"></div>
+                                <div> </div>
+                            </div>
+                            @*------------------------------------Esto es el registrar----------------------------------*@
+                            <form action="/User/Registrar" method="post">
+                                <div class="sign-up-htm">
                                     <div class="group">
                                         <label for="user" class="label">Usuario</label>
                                         <input id="user" type="text" autocomplete="off" class="input" value="@Model.username" name="username">

@@ -16,5 +16,6 @@ namespace DIARS_PROYECTO_FINAL.Models
         public string nombres { get; set; }
         public string apellidos { get; set; }
         public string celular { get; set; }
+        public string TokenRecovery { get; set; }
     }
 }

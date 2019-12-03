@@ -1,9 +1,18 @@
 ﻿
-
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
 }
+<style>
+    .h2 {
+        color: black;
+    }
+</style>
+<div class="row">
+    <br />
+    <h2 class="text-center ">LISTA DE OFERTAS</h2>
+    <hr />
+</div>
 <div class="container">
     <a class="btn btn-success" href="/Oferta/Crear">Crear Oferta</a>
 </div>
@@ -22,17 +31,17 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.nombre</td>
-                <td>@item.fechaInicio</td>
-                <td>@item.fechaFin</td>
-                <td>@item.descripcion</td>
-                <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
-                <td class="text-right">
-                    <a class="btn btn-primary " href="/Oferta/Editar?ID=@item.id">Editar</a>
-                    <a class="btn btn-danger" href="/Oferta/Eliminar?ID=@item.id">Eliminar</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@item.nombre</td>
+                    <td>@item.fechaInicio</td>
+                    <td>@item.fechaFin</td>
+                    <td>@item.descripcion</td>
+                    <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
+                    <td class="text-right">
+                        <a class="btn btn-primary " href="/Oferta/Editar?ID=@item.id">Editar</a>
+                        <a class="btn btn-danger" href="/Oferta/Eliminar?ID=@item.id">Eliminar</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

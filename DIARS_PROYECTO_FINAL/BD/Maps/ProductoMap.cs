@@ -17,6 +17,7 @@ namespace DIARS_PROYECTO_FINAL.BD.Maps
             HasRequired(o => o.Categoria)
                 .WithMany(o => o.Productos)
                 .HasForeignKey(o=>o.idCategoria );
+            
         }
         
     }

@@ -1,0 +1,24 @@
+﻿@model DIARS_PROYECTO_FINAL.Models.Recovery
+@{
+    ViewBag.Title = "starRecovery";
+}
+
+<h2>Recuperar Contraseña</h2>
+<br />
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="form-style">
+            <form action="@Url.Content("~/User/startRecovery")" method="post">
+                <label>Ingrese correo de Recuperación</label>
+                @Html.TextBoxFor(d => d.Email, null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Email, null, new { style = "color:red" })
+                <br />
+                <div class="text-lef t">
+                    <button class="btn btn-primary">Recuperar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

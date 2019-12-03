@@ -1,0 +1,34 @@
+﻿@model DIARS_PROYECTO_FINAL.Models.RecoveryPassword
+@{
+    ViewBag.Title = "Recovery";
+}
+
+<h2>Recovery</h2>
+<div>
+    @ViewBag.Error
+</div>
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="form-style">
+            <form action="@Url.Content("~/User/Recovery")" method="post">
+                @Html.HiddenFor(d => d.token)
+
+                <label>Escribe tu nueva contraseña</label>
+                @Html.PasswordFor(d => d.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Password, null, new { style = "color:red" })
+
+                <label>Vuelve a escribir tu contraseña</label>
+                @Html.PasswordFor(d => d.Password2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Password2, null, new { style = "color:red" })
+                <div>
+                    @ViewBag.Message
+                </div>
+
+                <br />
+                <div class="text-right">
+                    <button class="btn btn-primary">Recuperar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

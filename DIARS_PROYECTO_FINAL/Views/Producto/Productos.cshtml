@@ -1,23 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Productos";
+    Layout = null;
 }
-<style>
-    tbody {
-        color: rgba(0, 0, 0, 0.75);
-    }
-</style>
-<style>
-    .h2 {
-        color: black;
-    }
-</style>
-<div class="row">
-    <br />
-    <h2 class="text-center ">LISTA DE PRODUCTOS</h2>
-    <hr />
-</div>
+
+<h2>Lista de Productos</h2>
 
 <div id="index">
     <!--start-top-serch-->
@@ -27,10 +14,8 @@
     </div>
     <!--close-top-serch-->
 </div>
-<div>
-    <a id="btn">Crear</a>
-</div>
-<table class="table" id="div">
+
+<table class="table" id="tabla">
     <thead>
         <tr>
             <th>Id</th>
@@ -41,7 +26,7 @@
             <th>Stock</th>
             <th>Estado</th>
             <th>Imagen</th>
-            <th></th>
+            <th>Buttons</th>
         </tr>
     </thead>
 
@@ -50,7 +35,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td><div class="text-center">@item.Id</div> </td>
+                <td>@item.Id</td>
                 <td>@item.nombre</td>
                 <td>@item.fecha</td>
                 <td>@item.precio</td>
@@ -58,24 +43,22 @@
                 <td>@item.stock</td>
                 <td>@item.isActive</td>
                 <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
-                <td class="">
-                    <div class="text-right">
-                        <a class="btn btn-outline-success" href="/Producto/Editar?ID=@item.Id">Editar</a>
-                        <a class="btn btn-outline-success" href="/Producto/Eliminar?ID=@item.Id">Eliminar</a>
-                    </div>
+                <td>
+                    <a class="btn btn-outline-success" href="/Producto/Editar?ID=@item.Id">Editar</a>
+                    <a class="btn btn-outline-success" href="/Producto/Eliminar?ID=@item.Id">Eliminar</a>
                 </td>
+
+                @*@if (ViewBag.usuario != null)
+                    {
+                        <td><a class="btn btn-outline-success" href="/Producto/Editar">Editar</a></td>
+                        <td><a class="btn btn-outline-danger"href="/Producto/Editar">Eliminar</a></td>
+                        @*<td><a href="/Pokemon/Capturar?idPokemon=@item.Id&idUsuario=@ViewBag.usuario&tipo=2">Atrapar con superball</a></td>
+                    }*@
             </tr>
+
         }
 
     </tbody>
 
 </table>
 
-
-<script>
-    $("#btn").click(function (e) {
-        $.ajax("/Producto/Crear").done(function (res) {
-            $("#div").html(res);
-        })
-    });
-</script>

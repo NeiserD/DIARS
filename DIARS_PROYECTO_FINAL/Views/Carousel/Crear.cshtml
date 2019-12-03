@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Crear";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Agregar imágen al Carousel</h2>
+        <div class="col-md-6">
+            <form action="/Carousel/Crear" method="post" enctype="multipart/form-data">
+                <label>Ingrese Imagen</label>
+                <input class="form-control" type="file" name="file" />
+                <button>Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
