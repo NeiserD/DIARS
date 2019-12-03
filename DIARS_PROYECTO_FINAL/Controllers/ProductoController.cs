@@ -2,6 +2,7 @@
 using DIARS_PROYECTO_FINAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         
         public ActionResult Index()
         {
-            var productos = context.Productos.ToList();
+            var productos = context.Productos.Include(a=>a.Categoria).ToList();
             return View(productos);
         }
 
@@ -25,17 +26,13 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 
             return View(producto);
         }
-
-        // GET: Producto/Create
        
         public ActionResult Crear()
         {
             ViewBag.Categoria = context.Categorias;
             return View(new Producto());
         }
-
-        // POST: Producto/Create
-    
+        
         [HttpPost]
         public ActionResult Crear(Producto producto, HttpPostedFileBase file)
         {
@@ -46,7 +43,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 file.SaveAs(ruta);
                 producto.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
             }
-
+            validar(producto);
             if (ModelState.IsValid) {
                 producto.fecha = DateTime.Now;
                 producto.isActive = true;
@@ -57,23 +54,24 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(producto);
         }
 
-        // GET: Producto/Edit/5
-      
 
-        // POST: Producto/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Editar(int ID)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var producto = context.Productos.Where(o => o.Id == ID).First();
+            return View(producto);
+        }
 
+        [HttpPost]
+        public ActionResult Editar(Producto producto)
+        {
+          
+            if (ModelState.IsValid)
+            {
+                context.Entry(producto).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(producto);
         }
 
         public ActionResult Eliminar(int ID)
@@ -84,5 +82,39 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return RedirectToAction("Index");
         }
 
+        public void validar(Producto producto)
+        {
+            if (producto.nombre == null || producto.nombre == "")
+            {
+                ModelState.AddModelError("Nombre", "Ingrese nombre del producto");
+            }
+            
+            if (producto.nombre  == null || producto.nombre == "")
+            {
+                ModelState.AddModelError("Nombre", "Ingrese nombre del producto");
+            }
+
+            if (producto.stock.ToString() == null || producto.stock.ToString() == "")
+            {
+                ModelState.AddModelError("Stock", "Ingrese Stock del producto");
+            }
+            if (producto.modelo == null || producto.modelo == "")
+            {
+                ModelState.AddModelError("Modelo", "Ingrese Modelo del producto");
+            }
+            if (producto.marca == null || producto.marca == "")
+            {
+                ModelState.AddModelError("Marca", "Ingrese Marca del producto");
+            }
+            if (producto.talla.ToString() == null || producto.talla.ToString() == "")
+            {
+                ModelState.AddModelError("Talla", "Ingrese Talla del producto");
+            }
+
+            if (producto.imagen == null || producto.imagen== "")
+            {
+                ModelState.AddModelError("Imagen", "Ingrese imagen del producto");
+            }
+        }
     }
 }

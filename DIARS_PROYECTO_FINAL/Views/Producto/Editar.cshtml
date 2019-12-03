@@ -1,52 +1,48 @@
 ﻿
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <form action="/Producto/Editar" method="post" enctype="multipart/form-data">
-                <div class="col-md-4">
+        <div class="col-lg-3">
 
-                    <label>Nombre del Producto</label>
-                    <input class="form-control" autofocus autocomplete="off" type="text" name="nombre" value="@Model.nombre" />
-                    @*<label>Fecha de Registro</label>
-                        <input class="form-control" type="datetime" name="fecha" value="" />*@
-                    <label>Precio</label>
-                    <input class="form-control" name="precio" value="@Model.precio" />
-                    <label>Categoría</label>
-                    <input class="form-control" name="idCategoria" value="@Model.idCategoria" />
-                    <label>Stock</label>
-                    <input class="form-control" name="stock" value="@Model.stock" />
-                </div>
-                @*<label>Estado</label>
-                    <input class="form-control" name="isActive" value="" />*@
-                <div class="col-md-4">
-                    <label>Descripción</label>
-                    <textarea class="form-control" name="descripcion" value="@Model.descripcion"></textarea>
-                    <label>Marca</label>
-                    <input class="form-control" name="marca" value="@Model.marca" />
-                    <label>Modelo</label>
-                    <input class="form-control" name="modelo" value="@Model.modelo" />
-                    <label>talla</label>
-                    <input class="form-control" name="talla" value="@Model.talla" />
-                    @*<select name="talla">
-            <option value="">--------Eliga una opción---------</option>
-            <option value="28">28</option>
-            <option value="28">30</option>
-            <option value="28">32</option>
-            <option value="28">36</option>
-        </select>*@
+        </div>
 
-                    <label>Imagen del Producto</label>
-                    <input class="form-control" type="file" name="file" value="@Model.imagen" />
-                    <br />
-                    <br />
-                    <button class="btn btn-success">Guardar Cambios</button>
-                    <div>
-                        <a class="btn btn-primary" href="/Producto/">Cancelar</a>
-                    </div>
-                </div>
-                
+        <div class="container col-lg-6">
+            <h2 class="subtitulos text-center bg-primary">Editar Producto: @Model.nombre</h2>
+            <form action="/Producto/Editar" method="post">
+                <label>Nombre</label>
+                <input class="form-control" autocomplete="off" name="nombre" value="@Model.nombre" />
+
+                <label>Fecha de Registro</label>
+                <input class="form-control" autocomplete="off" name="fecha" value="@Model.fecha" />
+
+                <label>Precio</label>
+                <input class="form-control" autocomplete="off" name="precio" value="@Model.precio" />
+
+                <label>Stock</label>
+                <input style="height:45px" class="form-control" autocomplete="off" name="stock" value="@Model.stock" />
+
+                <label>Descripción</label>
+                <input style="height:45px" class="form-control" autocomplete="off" name="descripcion" value="@Model.descripcion" />
+
+                <label>Marca</label>
+                <input style="height:45px" class="form-control" autocomplete="off" name="marca" value="@Model.marca" />
+
+                <label>Modelo</label>
+                <input style="height:45px" class="form-control" autocomplete="off" name="modelo" value="@Model.modelo" />
+
+                <label>Talla</label>
+                <input style="height:45px" class="form-control" autocomplete="off" name="talla" value="@Model.talla" />
+
+              
+                <button class="btn btn-primary">Guardar</button>
+                <a class="btn btn-danger" href="/Oferta">Cancelar</a>
             </form>
         </div>
     </div>
 </div>
+
 

@@ -89,7 +89,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             return RedirectToAction("", "Home");
         }
-        [HttpGet]
+        [HttpGet]   
         public ViewResult Registrar()
         {
 

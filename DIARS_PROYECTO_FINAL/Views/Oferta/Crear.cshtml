@@ -20,30 +20,34 @@
             <h2 class="subtitulos text-center bg-primary">Crear nueva Oferta</h2>
             <form action="/Oferta/Crear" method="post" enctype="multipart/form-data">
                 <label>Nombre</label>
-                <input class="form-control" autocomplete="off" name="nombre" value="" />
-                <br />
-                <label>Precio Normal</label>
-                <input class="form-control" name="precioNormal" value="" />
-                <br />
-                <label>Precio de Oferta</label>
-                <input class="form-control" name="precioOferta" value="" />
+                <input class="form-control" autocomplete="off" name="nombre" value="@Model.nombre" />
                 <br />
                 <strong> @Html.ValidationMessage("Nombre")</strong>
                 <br />
+                <label>Precio Normal</label>
+                <input class="form-control" name="precioNormal" value="@Model.precioNormal" />
+                <br />
+                <strong> @Html.ValidationMessage("PrecioN")</strong>
+                <br />
+                <label>Precio de Oferta</label>
+                <input class="form-control" name="precioOferta" value="@Model.precioOferta" />
+                <br />
+                <strong> @Html.ValidationMessage("PrecioO")</strong>
+                <br />
                 <label>Fecha de Fin</label>
-                <input class="form-control" autocomplete="off" name="fechaFin" value="" />
+                <input class="form-control" autocomplete="off" name="fechaFin" />
                 <br />
                 <strong> @Html.ValidationMessage("FechaFin")</strong>
                 <br />
                 <label>Descripción</label>
-                <input style="height:45px" class="form-control" autocomplete="off" name="descripcion" value="" />
+                <input style="height:45px" class="form-control" autocomplete="off" name="descripcion" value="@Model.descripcion" />
                 <br />
                 <strong> @Html.ValidationMessage("Descripcion")</strong>
                 <br />
                 <label>Imagen del Producto</label>
-                <input class="form-control" type="file" name="file" value="" />
+                <input class="form-control" type="file" name="file" value="@Model.imagen"/>
                 <br />
-                <strong> @Html.ValidationMessage("Nombre")</strong>
+                <strong> @Html.ValidationMessage("Image")</strong>
                 <br />
                 <button class="btn btn-primary">Guardar</button>
                 <a class="btn btn-danger" href="/Oferta">Cancelar</a>
