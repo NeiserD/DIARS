@@ -15,11 +15,23 @@
 
         $("#editPerfile").click(function () {
 
-            $.ajax("/User/changePassword").done(function (response) {
-                console.log(response)
+            $.ajax("/User/EditProfile").done(function (response) {
+                //alert("asd")
+                //console.log(response)
                 $("#request").html(response)
-            }).
-
+            })
         })
     );
+
+        $("#ChangePassoword").click(function () {
+
+            $.ajax("/User/changePassword").done(function (response) {
+                //alert("asd")
+                //console.log(response)
+                $("#request").html(response)
+            })
+
+        })
+
+
 </script>

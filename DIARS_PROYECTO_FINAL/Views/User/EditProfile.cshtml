@@ -1,0 +1,46 @@
+﻿@model DIARS_PROYECTO_FINAL.Models.Usuario
+<h2>Editar perfil</h2>
+<input disabled id="nombre" name="nombres" value="@Model.nombres" />
+<button id="btn-editarNombre">Editar</button>
+<button id="btn-guardarNombre">Gurdar</button>
+
+<hr />
+<input disabled id="celular" name="celular" value="@Model.celular" />
+<button id="btn-editarCelular">Editar</button>
+<button id="btn-guardarCelular">Gurdar</button>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+<script>
+    
+    $("#btn-editarNombre").click(function () {
+       $("#nombre").removeAttr("disabled");
+    })
+    $("#btn-guardarNombre").click(function () {
+        $("#nombre").attr("disabled", true);
+        let nombre = $("#nombre").val();
+        
+        $.ajax(`/User/EditarNombre?nombre=${nombre}`).done(function (e) {
+            if (e == "ok")alert("Datos Modificados")
+
+            })
+    })
+
+
+    $("#btn-editarCelular").click(function () {
+        $("#celular").removeAttr("disabled");
+       
+    })
+    $("#btn-guardarCelular").click(function () {
+        $("#celular").attr("disabled", true);
+        let celular = $("#celular").val();
+        
+        $.ajax(`/User/EditarCelular?nombres=${celular}`).done(function (e) {
+            if (e == "ok")alert("Datos Modificados")
+
+            })
+    })
+
+
+</script>

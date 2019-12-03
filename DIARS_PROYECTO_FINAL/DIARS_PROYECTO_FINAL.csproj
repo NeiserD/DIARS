@@ -436,8 +436,8 @@
     <Content Include="Views\User\ProfileDetails.cshtml" />
     <Content Include="Views\Direccion\Index.cshtml" />
     <Content Include="Views\Direccion\Crear.cshtml" />
-    <Content Include="Views\User\profileEdit\EditProfile.cshtml" />
-    <Content Include="Views\User\profileEdit\changePassword.cshtml" />
+    <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\User\changePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

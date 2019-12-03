@@ -14,6 +14,9 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class UserController : Controller
     {
         public StoreContext context = StoreContext.getInstance();
+
+
+        [Authorize]
         public ActionResult Index()
         {
             var users = context.Usuarios.ToList();
@@ -64,6 +67,8 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpPost]
         public ActionResult Login(Usuario objUser)
         {
+
+            if (Session["Usuario"] != null) return View("Producto", "Index");
             validar(objUser);
             if (ModelState.IsValid)
             {
@@ -106,8 +111,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 
             if (ModelState.IsValid)
             {
-                
-
+            
                 usuario.IdRol = 2;
                 usuario.password = Hash.ComputeSha256Hash(usuario.password);
                 context.Usuarios.Add(usuario);
@@ -118,14 +122,82 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View(usuario);
         }
 
+        [HttpPost]
+        [Authorize]
+        public string contrasennaPasword(string datos )
+        {
+            try
+            {
+                var usuario = (Usuario)Session["Usuario"];
+                var IsUser = context.Usuarios.Where(a => a.Id == usuario.Id).FirstOrDefault();
+                IsUser.password = Hash.ComputeSha256Hash(datos);
+                context.SaveChanges();
+                return "ok";
+            }
+            catch
+            {
+                return "error";
+            }
+
+        }
+
+        [Authorize]
         public PartialViewResult changePassword() {
 
             return PartialView();
         }
+        [Authorize]
+        [HttpGet]
+        public String  VerifiPassword(string pass)
+        {
+            var usuario = (Usuario)Session["Usuario"];
+            return (usuario.password == Hash.ComputeSha256Hash(pass))?"ok":"error";
+
+        }
+      
+
+        [HttpGet]
+        [Authorize]
         public PartialViewResult EditProfile() {
-            return PartialView();
+            var usuario = (Usuario)Session["Usuario"];
+            return PartialView(context.Usuarios.Where(a=>a.Id == usuario.Id ).FirstOrDefault());
+        }
+       
+        [Authorize]
+        public String EditarCelular(String nombres)
+        {
+            try
+            {
+                var usuario = (Usuario)Session["Usuario"];
+                var usuarioDb = (context.Usuarios.Where(a => a.Id == usuario.Id).FirstOrDefault());
+                usuarioDb.celular = nombres;
+                context.SaveChanges();
+                return "ok";
+            }
+            catch (Exception e) {
+                return e.ToString();
+            }
         }
 
+        [Authorize]
+        public String EditarNombre(String nombre)
+        {
+            try
+            {
+                var usuario = (Usuario)Session["Usuario"];
+                var usuarioDb = (context.Usuarios.Where(a => a.Id == usuario.Id).FirstOrDefault());
+                usuarioDb.nombres = nombre;
+                context.SaveChanges();
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+
+        //valida que locs campos sean unicos 
         public void validar_campos_unicosbd(Usuario usuario) {
          
             //valida username 
