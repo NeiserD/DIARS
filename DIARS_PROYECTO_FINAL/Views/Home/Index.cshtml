@@ -49,6 +49,17 @@
                 <div class="col-md-10"> <div id="slick-nav-2" class="products-slick-nav"></div></div>
             </div>
         </div>
+        <br />
+        <div class="container">
+            <div class="row" style="width:120px;background-color:#e01c1c;margin-bottom:-24px; border-radius:5px">
+                <h2 style="color:white;font-family: serif">Ofertas</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <hr style="bottom:0px;height:3px;background-color:#f20c0c" />
+            </div>
+        </div>
         <div id="slick-nav-1" class="products-slick-nav"></div>
         @*index de ofertas*@
         <div id="div">
@@ -56,7 +67,19 @@
         @*Hasta aquí index de ofertas*@
 
         <br />
-        <hr style="color:red" />
+        <br />
+        <div class="container">
+            <div class="row" style="width:130px;background-color:#e01c1c;margin-bottom:-24px; border-radius:5px">
+                <h2 style="color:white;font-family: serif">Productos</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <hr style="bottom:0px;height:3px;background-color:#f20c0c" />
+            </div>
+        </div>
+
+
         @foreach (var item in Model)
         {
             <div class="col-md-4 text-center col-sm-6">
@@ -81,8 +104,8 @@
                         </div>
                         <div class="product-btns">
 
-                            <a class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Añadir a la compra</span></a>
-                            <a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Vista rápida</span></a>
+                            @*<a class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Añadir a la compra</span></a>*@
+                            <a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver Detalles</span></a>
 
                         </div>
 

@@ -155,6 +155,8 @@
     <Compile Include="Models\MetodoPago.cs" />
     <Compile Include="Models\Oferta.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Recovery.cs" />
+    <Compile Include="Models\RecoveryPassword.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -393,7 +395,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -437,6 +441,8 @@
     <Content Include="Views\Carousel\Crear.cshtml" />
     <Content Include="Views\Carousel\Index.cshtml" />
     <Content Include="Views\Carousel\IndexPrincipal.cshtml" />
+    <Content Include="Views\User\startRecovery.cshtml" />
+    <Content Include="Views\User\Recovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

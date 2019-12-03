@@ -41,11 +41,7 @@
                                             <input value="@Model.password" id="pass" type="password" autocomplete="off" class="input" data-type="password" name="password">
                                             <strong>@Html.ValidationMessage("password")</strong>
                                         </div>
-                                        @*<div class="group">
-                                    <input id="check" type="checkbox" class="check">
-                                    <label for="check"><span class="icon"></span>Acepto recibir notificaciones</label>
-                                </div>*@
-                                        <a class="btn btn-dark" style="color:white" href="/Home">¿Olvido su contraseña?</a>
+                                        <a class="btn btn-dark" style="color:white" href="/User/startRecovery">¿Olvido su contraseña?</a>
                                         <div>
                                             <strong>@Html.ValidationMessage("invalid") </strong>
                                         </div>
