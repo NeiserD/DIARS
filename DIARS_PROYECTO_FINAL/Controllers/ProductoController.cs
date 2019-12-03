@@ -64,12 +64,17 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpPost]
         public ActionResult Editar(Producto producto)
         {
-          
-            if (ModelState.IsValid)
+            try
+            { if (ModelState.IsValid)
+                {
+                    context.Entry(producto).State = EntityState.Modified;
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
             {
-                context.Entry(producto).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                return View(producto);
             }
             return View(producto);
         }

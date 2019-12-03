@@ -33,12 +33,12 @@
                                 <fieldset>
                                     <div class="group">
                                         <label for="user" class="label">Usuario</label>
-                                        <input id="user" type="text" autocomplete="off" class="input" value="" name="username">
+                                        <input id="user" type="text" autocomplete="off" class="input" value="@Model.username" name="username">
                                         <strong>@Html.ValidationMessage("username")</strong>
                                     </div>
                                     <div class="group">
                                         <label for="pass" class="label">Contraseña</label>
-                                        <input id="pass" type="password" autocomplete="off" class="input" data-type="password" name="password">
+                                        <input id="pass" type="password" autocomplete="off" class="input" data-type="password" value="@Model.password" name="password">
                                         <strong>@Html.ValidationMessage("password")</strong>
                                     </div>
                                     @*<div class="group">
@@ -63,18 +63,21 @@
                             <div class="sign-up-htm">
                                 <div class="group">
                                     <label for="user" class="label">Nombres</label>
-                                    <input id="user" autocomplete="off" type="text" class="input" name="nombres">
+                                    <input id="user" autocomplete="off" type="text" class="input" value="@Model.nombres" name="nombres">
                                     <strong>@Html.ValidationMessage("Nombre1")</strong>
+                                    <strong>@Html.ValidationMessage("Nombre2")</strong>
                                 </div>
                                 <div class="group">
                                     <label for="user" class="label">Apellidos</label>
-                                    <input id="user" autocomplete="off" type="text" class="input" name="apellidos">
+                                    <input id="user" autocomplete="off" type="text" class="input" value="@Model.apellidos"name="apellidos">
                                     @*<strong>@Html.ValidationMessage("Apellido1")</strong>*@
                                 </div>
                                 <div class="group">
                                     <label for="pass" class="label">DNI</label>
-                                    <input id="pass" name="dni" type="text" class="input">
+                                    <input id="pass" name="dni" placeholder="Ingrese sólo números" value="@Model.dni" class="input">
                                     <strong>@Html.ValidationMessage("DNI")</strong>
+                                    <strong>@Html.ValidationMessage("NumeroDocumento")</strong>
+
                                 </div>
                                 @*<div class="group">
                                     <label for="pass" class="label">Celular</label>
@@ -83,17 +86,17 @@
                                 </div>*@
                                 <div class="group">
                                     <label for="pass" class="label">Email</label>
-                                    <input id="pass" name="email" type="text" class="input">
+                                    <input id="pass" name="email" type="text" value="@Model.email" class="input">
                                     @*<strong>@Html.ValidationMessage("Email1")</strong>*@
                                 </div>
                                 <div class="group">
                                     <label for="pass" class="label">Nombre de Usuario</label>
-                                    <input id="pass" name="username" type="text" class="input">
+                                    <input id="pass" name="username" type="text" value="@Model.username" class="input">
                                     <strong>@Html.ValidationMessage("UserName1")</strong>
                                 </div>
                                 <div class="group">
                                     <label for="pass" class="label">Contraseña</label>
-                                    <input id="pass" type="password" class="input" data-type="password" name="password">
+                                    <input id="pass" type="password" class="input" data-type="password" value="@Model.password" name="password">
                                     <strong>@Html.ValidationMessage("Password1")</strong>
                                 </div>
 

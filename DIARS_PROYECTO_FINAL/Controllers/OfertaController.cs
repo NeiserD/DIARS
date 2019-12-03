@@ -48,7 +48,6 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 file.SaveAs(ruta);
                 oferta.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
             }
-           
           
             ValidarOferta(oferta);
             if (ModelState.IsValid)
@@ -69,14 +68,24 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         }
         
         [HttpPost]
-        public ActionResult Editar(Oferta oferta, HttpPostedFileBase file)
+        public ActionResult Editar(Oferta oferta)
         {
-            ValidarOfer(oferta);
-            if (ModelState.IsValid)
+            try
             {
-                context.Entry(oferta).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    Oferta ofert= context.Ofertas.Where(x => x.id == oferta.id).First();
+                    ofert.nombre = oferta.nombre;
+                    ofert.descripcion = oferta.descripcion;
+                    ofert.fechaFin = oferta.fechaFin;
+                    ofert.fechaInicio = oferta.fechaInicio;
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return View(oferta);
             }
             return View(oferta);
         }

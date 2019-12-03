@@ -444,6 +444,7 @@
     <Content Include="Views\User\startRecovery.cshtml" />
     <Content Include="Views\User\Recovery.cshtml" />
     <Content Include="Views\Producto\Editar.cshtml" />
+    <Content Include="Views\Home\Conocenos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
