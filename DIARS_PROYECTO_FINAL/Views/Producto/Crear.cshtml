@@ -3,7 +3,11 @@
     ViewBag.Title = "Crear";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<style>
+    strong {
+    color:red;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -12,42 +16,45 @@
 
                     <label>Nombre del Producto</label>
                     <input class="form-control" autofocus autocomplete="off" type="text" name="nombre" value="@Model.nombre" />
-                    @*<label>Fecha de Registro</label>
-        <input class="form-control" type="datetime" name="fecha" value="" />*@
+                    <br /><strong>@Html.ValidationMessage("Nombre")</strong>
                     <label>Precio</label>
                     <input class="form-control" name="precio" value="@Model.precio" />
+                    <br /><strong>@Html.ValidationMessage("Nombre")</strong>
                     <label>Categoría</label>
                     <select name="idCategoria">
                         <option value="">--------Eliga una opción---------</option>
                         @foreach (var item in ViewBag.Categoria)
                         {
-                            <option value="@item.id">@item.nombre</option>
+                            <option  @(Model.idCategoria==item.id ? "selected":"") value="@item.id">@item.nombre</option>
                         }
                     </select>
+                    <br /><strong>@Html.ValidationMessage("Talla")</strong>
                     <label>Stock</label>
                     <input class="form-control" name="stock" value="@Model.stock" />
+                    <br /><strong>@Html.ValidationMessage("Stock")</strong>
                 </div>
-                @*<label>Estado</label>
-                <input class="form-control" name="isActive" value="" />*@
                 <div class="col-md-4">
                     <label>Descripción</label>
                     <textarea class="form-control" name="descripcion" value="@Model.descripcion"></textarea>
+                    <br /><strong>@Html.ValidationMessage("Nombre")</strong>
                     <label>Marca</label>
                     <input class="form-control" name="marca" value="@Model.marca" />
+                    <br /><strong>@Html.ValidationMessage("Marca")</strong>
                     <label>Modelo</label>
                     <input class="form-control" name="modelo" value="@Model.modelo" />
+                    <br /><strong>@Html.ValidationMessage("Modelo")</strong>
                     <label>talla</label>
-                    @*<input class="form-control" name="talla" value="@Model.talla" />*@
                     <select name="talla">
                         <option value="">--------Eliga una opción---------</option>
-                        <option value="28">28</option>
-                        <option value="28">30</option>
-                        <option value="28">32</option>
-                        <option value="28">36</option>
+                        <option @(Model.talla == 28 ? "selected":"") value="28">28</option>
+                        <option @(Model.talla ==30 ? "selected":"") value="30">30</option>
+                        <option @(Model.talla ==32? "selected":"") value="32">32</option>
+                        <option @(Model.talla ==36? "selected":"")value="36">36</option>
                     </select>
 
                     <label>Imagen del Producto</label>
-                    <input class="form-control" type="file" name="file" value="" />
+                    <input class="form-control" type="file" name="file" value="@Model.imagen" />
+                    <br /><strong>@Html.ValidationMessage("Imagen")</strong>
                     <br />
                     <br />
                 </div>

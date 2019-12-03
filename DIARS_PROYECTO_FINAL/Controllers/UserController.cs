@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -74,6 +75,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 
             if (Session["Usuario"] != null) return View("Producto", "Index");
             validar(objUser);
+         
             if (ModelState.IsValid)
             {
                 var contrasenna_hasheado = Hash.ComputeSha256Hash( objUser.password);
@@ -101,7 +103,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return RedirectToAction("", "Home");
          
         }
-        [HttpGet]
+        [HttpGet]   
         public ViewResult Registrar()
         {
 
@@ -110,18 +112,20 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [HttpPost]
         public ActionResult Registrar(Usuario usuario)
         {
-            validarCampos(usuario);
-            validar_campos_unicosbd(usuario);
-
-            if (ModelState.IsValid)
+            try
             {
-            
-                usuario.IdRol = 2;
-                usuario.password = Hash.ComputeSha256Hash(usuario.password);
-                context.Usuarios.Add(usuario);
-                context.SaveChanges();
-                return RedirectToAction("Login");
-                
+                validarUsuarios(usuario);
+                if (ModelState.IsValid)
+                {
+                    usuario.IdRol = 2;
+                    context.Usuarios.Add(usuario);
+                    context.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+            }
+            catch (Exception)
+            {
+                return View(usuario);
             }
             return View(usuario);
         }
@@ -248,24 +252,8 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 ModelState.AddModelError("invalid", "Usuario y/o Contraseña incorrecta");
             }
         }
-        public void validarCampos(Usuario usuario)
+        public void validarUsuarios(Usuario usuario)
         {
-            if (usuario.nombres == null || usuario.nombres == "")
-            {
-                ModelState.AddModelError("Nombre1", "Este campo es requerido");
-            }
-            if (usuario.apellidos == null || usuario.apellidos == "")
-            {
-                ModelState.AddModelError("Apellido1", "El campo Apellidos es requerido");
-            }
-            if (usuario.dni == null || usuario.dni == "")
-            {
-                ModelState.AddModelError("DNI", "El campo DNI es requerido");
-            }
-            //if (usuario.celular == null || usuario.celular == "")
-            //{
-            //    ModelState.AddModelError("Celular", "El campo Celular es requerido");
-            //}
             if (usuario.email == null || usuario.email == "")
             {
                 ModelState.AddModelError("Email1", "El campo Email es requerido");
@@ -274,12 +262,62 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             {
                 ModelState.AddModelError("UserName1", "El campo Nombre de Usuario es requerido");
             }
+            if (usuario.dni == null || usuario.dni== "")
+            {
+                ModelState.AddModelError("DNI", "El campo DNI es requerido");
+            }
             if (usuario.password == null || usuario.password == "")
             {
                 ModelState.AddModelError("Password1", "El campo Password es requerido");
             }
+            if (usuario.nombres == null || usuario.nombres == "")
+            {
+                ModelState.AddModelError("Nombre1", "Este campo es requerido");
+            }
+            if (!validarLetras(usuario.nombres)) { 
+               ModelState.AddModelError("Nombre2", "Solo ingrese caracteres alfabeticos");
+            }
+            if (!validarnUMEROS(usuario.dni))
+            {
+                ModelState.AddModelError("NumeroDocumento", "Solo Ingrese numeros");
+            }
+          
+           
         }
 
+
+        //Metodos de validación
+        public bool validarLetras(string numString)
+        {
+
+            string parte = numString.Trim();
+            int count = parte.Count(s => s == ' ');
+            if (parte == "")
+            {
+                return false;
+            }
+            else if (count > 1)
+            {
+                return false;
+            }
+            char[] charArr = parte.ToCharArray();
+            foreach (char cd in charArr)
+            {
+                if (!char.IsLetter(cd) && !char.IsSeparator(cd))
+                    return false;
+            }
+            return true;
+        }
+        public bool validarnUMEROS(string numString)
+        {
+            char[] charArr = numString.ToCharArray();
+            foreach (char cd in charArr)
+            {
+                if (!char.IsNumber(cd))
+                    return false;
+            }
+            return true;
+        }
         ////*********************************RECUPERAR CONTRASEÑA***********************///////////////////
         [HttpGet]
         public ActionResult startRecovery()

@@ -34,12 +34,12 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult enviarCorreo()
-        //{
+        
+        public ActionResult Conocenos()
+        {
 
-        //    return View();
-        //}
+            return View();
+        }
 
     }
 }

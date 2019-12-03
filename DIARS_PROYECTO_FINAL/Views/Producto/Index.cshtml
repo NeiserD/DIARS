@@ -27,8 +27,9 @@
     </div>
     <!--close-top-serch-->
 </div>
-<div>
-    <a id="btn">Crear</a>
+<div class="text-right">
+    <a href="/Producto/Crear" class="btn btn-primary">Nuevo Producto</a>
+    <br />
 </div>
 <table class="table" id="div">
     <thead>
@@ -54,9 +55,20 @@
                 <td>@item.nombre</td>
                 <td>@item.fecha</td>
                 <td>@item.precio</td>
-                <td>@item.idCategoria</td>
+                <td>@item.Categoria.nombre</td>
                 <td>@item.stock</td>
-                <td>@item.isActive</td>
+                <td>
+                    @{
+                        if (item.isActive == true)
+                        {
+                            <span>Activo</span>
+                        }
+                        else
+                        {
+                            <span>Inactivo</span>
+                        }
+                                }
+                            </td>
                 <td><img src="@item.imagen" style="width:50px;height:50px" /></td>
                 <td class="">
                     <div class="text-right">

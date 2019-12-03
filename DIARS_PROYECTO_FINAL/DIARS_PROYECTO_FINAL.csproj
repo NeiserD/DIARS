@@ -456,6 +456,8 @@
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\User\changePassword.cshtml" />
     <Content Include="Views\User\CarritoCompras.cshtml" />
+    <Content Include="Views\Producto\Editar.cshtml" />
+    <Content Include="Views\Home\Conocenos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
