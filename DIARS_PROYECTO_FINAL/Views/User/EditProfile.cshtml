@@ -22,7 +22,10 @@
         let nombre = $("#nombre").val();
         
         $.ajax(`/User/EditarNombre?nombre=${nombre}`).done(function (e) {
-            if (e == "ok")alert("Datos Modificados")
+            if (e == "ok") {
+                alert("Datos Modificados correctamente")
+                location.reload();
+            }
 
             })
     })
@@ -37,7 +40,10 @@
         let celular = $("#celular").val();
         
         $.ajax(`/User/EditarCelular?nombres=${celular}`).done(function (e) {
-            if (e == "ok")alert("Datos Modificados")
+            if (e == "ok") {
+                alert("Datos Modificados correctamente")
+                location.reload();
+            }
 
             })
     })

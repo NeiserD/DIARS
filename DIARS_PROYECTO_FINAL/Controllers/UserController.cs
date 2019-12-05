@@ -24,8 +24,16 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var users = context.Usuarios.ToList();
-            return View(users);
+            var usuuario = (Usuario)Session["Usuario"];
+            if (usuuario.IdRol != 2)
+            {
+                var users = context.Usuarios.ToList();
+                return View(users);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [Authorize]
@@ -117,9 +125,14 @@ namespace DIARS_PROYECTO_FINAL.Controllers
                 validarUsuarios(usuario);
                 if (ModelState.IsValid)
                 {
-                    usuario.IdRol = 2;
+                    usuario.IdRol = 1;
+                    usuario.password = Hash.ComputeSha256Hash(usuario.password);
                     context.Usuarios.Add(usuario);
                     context.SaveChanges();
+                    var oUser = context.Usuarios.Where(d => d.email == usuario.email).FirstOrDefault();
+                    var cUser = context.Usuarios.Where(d => d.username == usuario.username).FirstOrDefault();
+                    //enviar correo 
+                    BienvenidoEmail(oUser.email,cUser.username);
                     return RedirectToAction("Login");
                 }
             }
@@ -258,7 +271,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             {
                 ModelState.AddModelError("Email1", "El campo Email es requerido");
             }
-            if (usuario.email == null || usuario.email == "")
+            if (usuario.username == null || usuario.username== "")
             {
                 ModelState.AddModelError("UserName1", "El campo Nombre de Usuario es requerido");
             }
@@ -423,6 +436,28 @@ namespace DIARS_PROYECTO_FINAL.Controllers
             MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Recuperacion de Contraseña",
                 "<p>Correo recuperacion de contraseña </p><br>" +
                 "<a href='" + Url + "'>Click para recuperar </a>");
+
+            oMailMessage.IsBodyHtml = true;
+            SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+            oSmtpClient.EnableSsl = true;
+            oSmtpClient.UseDefaultCredentials = false;
+
+            oSmtpClient.Port = 587;
+            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+            oSmtpClient.Send(oMailMessage);
+            oSmtpClient.Dispose();
+        }
+
+
+        //*****************************BIENVENIDO****************************************************************************
+
+        private void BienvenidoEmail(string EmailDestino,string user)
+        {
+            string EmailOrigen = "envioprueba3@gmail.com";
+            string Contraseña = "@dyars123";
+            
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Bienvenido a PolonyStore",
+                "<p>¡BIENVENIDO "+ user + " A POLONYSTORE!</p><br>");
 
             oMailMessage.IsBodyHtml = true;
             SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");

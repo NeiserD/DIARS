@@ -19,7 +19,7 @@
         int countProductos;
         if (usuario == null) {
             usuario = new Usuario();
-            usuario.username = "Identifícate";
+            usuario.username = "Indentificate";
             isNotLogueado = false ;
             countProductos = 0;
         }
@@ -90,8 +90,31 @@
                                             <li class="text-left">
                                                 @if (isNotLogueado)
                                                 {
-                                                    <a href="/User/ProfileDetails"><i class="fa "></i> Ver Perfil</a>
-                                                    <a href="/User/Salir"><i class="fa "></i> Salir</a>
+                                                    if (usuario.IdRol == 1)
+                                                    {
+                                                       <div class="container">
+                                                           <div class="row">
+                                                               <div class="col-md-8">
+
+                                                                   <div class="col-md-6">
+                                                                       <a href="/User/ProfileDetails"><i class="fa fa-user"></i> Ver Perfil</a>
+                                                                       <a href="/User/Salir"><i class="fa fa-power-off"></i> Salir</a>
+
+                                                                   </div>
+                                                                   <div >
+                                                                       <a href="/Producto"><i class="fa fa-tasks "></i> Ir a Módulo de Administración</a>
+                                                                   </div>
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                                    }
+                                                    else
+                                                    {
+                                                       <div class="container">
+                                                           <a href="/User/ProfileDetails"><i class="fa fa-user"></i>Ver Perfil</a>
+                                                           <a href="/User/Salir"><i class="fa fa-power-off"></i> Salir</a>
+                                                       </div>
+                                                    }
                                                 }
 
                                             </li>
@@ -233,8 +256,8 @@
                 <!-- NAV -->
                 <!----------------------------------------------------------------------MENU---------------------------------------------------------------->
                 <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="http://localhost:49852/">Home</a></li>
-                    <li><a class="navbar-brand" href="/Home/Conocenos">Conocenos</a></li>
+                    <li class=""><a href="http://localhost:49852/">Home</a></li>
+                    <li><a class="" href="/Home/Conocenos">Conocenos</a></li>
                    @*<li><a class="navbar-brand" href="/Categoria">Categorías</a></li>*@
                 </ul>
                 <!-- /NAV -->

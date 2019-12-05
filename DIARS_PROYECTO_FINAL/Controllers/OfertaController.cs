@@ -13,11 +13,18 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class OfertaController : Controller
     {
         StoreContext context = StoreContext.getInstance();
-       
+       [Authorize]
         public ActionResult Index()
         {
-            var oferta = context.Ofertas.ToList();
-            return View(oferta);
+            var usuuario = (Usuario)Session["Usuario"];
+            if (usuuario.IdRol != 2)
+            {
+                var oferta = context.Ofertas.ToList();
+                return View(oferta);
+            }
+            else {
+                return RedirectToAction("Index", "Home");
+            }
         }
         //Ajax for home index
         public ActionResult Ofertas()

@@ -13,47 +13,70 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     public class ProductoController : Controller
     {
         public StoreContext context = StoreContext.getInstance();
-        
+
+        [Authorize]
         public ActionResult Index()
         {
-            var productos = context.Productos.Include(a=>a.Categoria).ToList();
-            return View(productos);
+            //1 = Admin
+            //2 = User
+            var usuuario = (Usuario)Session["Usuario"];
+            if (usuuario.IdRol != 2){
+                var productos = context.Productos.Include(a => a.Categoria).ToList();
+                return View(productos);
+            }
+            else {
+                return Redirect("~/");
+            }
         }
-
+       
         public ActionResult Especificaciones(int ID)
         {
             Producto producto = context.Productos.Find(ID);
 
             return View(producto);
         }
-       
+        [Authorize]
         public ActionResult Crear()
         {
-            ViewBag.Categoria = context.Categorias;
-            return View(new Producto());
+            var usuuario = (Usuario)Session["Usuario"];
+            if (usuuario.IdRol != 2)
+            {
+                ViewBag.Categoria = context.Categorias;
+                return View(new Producto());
+            }
+            else {
+                return RedirectToAction("Index", "Home");
+            }
         }
-        
+        [Authorize]
         [HttpPost]
         public ActionResult Crear(Producto producto, HttpPostedFileBase file)
         {
-            ViewBag.Categoria = context.Categorias;
-            if (file != null && file.ContentLength > 0)
+            var usuuario = (Usuario)Session["Usuario"];
+            if (usuuario.IdRol != 2 && usuuario.IdRol != null)
             {
-                string ruta = Path.Combine(Server.MapPath("~/imagenes"), Path.GetFileName(file.FileName));
-                file.SaveAs(ruta);
-                producto.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
+                ViewBag.Categoria = context.Categorias;
+                if (file != null && file.ContentLength > 0)
+                {
+                    string ruta = Path.Combine(Server.MapPath("~/imagenes"), Path.GetFileName(file.FileName));
+                    file.SaveAs(ruta);
+                    producto.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
+                }
+                validar(producto);
+                if (ModelState.IsValid)
+                {
+                    producto.fecha = DateTime.Now;
+                    producto.isActive = true;
+                    context.Productos.Add(producto);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(producto);
             }
-            validar(producto);
-            if (ModelState.IsValid) {
-                producto.fecha = DateTime.Now;
-                producto.isActive = true;
-                context.Productos.Add(producto);
-                context.SaveChanges();
-                return RedirectToAction("Index");
+            else {
+                return Redirect("~/");
             }
-            return View(producto);
         }
-
 
         public ActionResult Editar(int ID)
         {

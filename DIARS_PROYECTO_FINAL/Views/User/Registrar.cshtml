@@ -1,7 +1,7 @@
 ﻿@model DIARS_PROYECTO_FINAL.Models.Usuario
 @{
     ViewBag.Title = "Registrar";
-    Layout = null;
+    
 }
 
 <link href="~/Content/Admin/css/login.css" rel="stylesheet" />
@@ -114,8 +114,9 @@
                                     </div>*@
                                 <div class="group">
                                     <label for="pass" class="label">Email</label>
-                                    <input id="pass" name="email" type="text" value="@Model.email" class="input">
+                                    <input  id="pass" name="email" type="text" value="@Model.email" class="input">
                                     @*<strong>@Html.ValidationMessage("Email1")</strong>*@
+                                    @*@Html.TextBoxFor(d => d.email, null, new { @class = "form-control" })*@
                                 </div>
                                 <div class="group">
                                     <label for="pass" class="label">Nombre de Usuario</label>

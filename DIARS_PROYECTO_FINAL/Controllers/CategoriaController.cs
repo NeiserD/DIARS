@@ -11,35 +11,76 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     {
 
         public StoreContext context = StoreContext.getInstance();
-        [Authorize]
-        public ViewResult Index()
+      //  [Authorize]
+        public ActionResult Index()
         {
-            var categorias = context.Categorias.ToList();
-            return View(categorias);
+            var usuuario = (Usuario)Session["Usuario"];
+            try
+            {
+                if (usuuario.IdRol != 2 && usuuario.IdRol != null )
+                {
+                    var categorias = context.Categorias.ToList();
+                    return View(categorias);
+                }
+                else
+                {
+                    return Redirect("~/");
+                }
+            }
+            catch (Exception)
+            {
+                return Redirect("~/");
+            }
         }
-
-
-
-
+        
         //[Authorize]
-        public ViewResult Crear()
+        public ActionResult Crear()
         {
-            return View(new Categoria());
+            var usuuario = (Usuario)Session["Usuario"];
+            try
+            {
+                if (usuuario.IdRol != 2 && usuuario.IdRol != null)
+                {
+                    return View(new Categoria());
+                }
+                else
+                {
+                    return Redirect("~/");
+                }
+            }
+            catch (Exception)
+            {
+                return Redirect("~/");
+            }
         }
 
         //[Authorize]
         [HttpPost]
         public ActionResult Crear(Categoria categoria)
         {
-            ValidarCate(categoria);
-            if (ModelState.IsValid)
+            var usuuario = (Usuario)Session["Usuario"];
+            try
             {
-                context.Categorias.Add(categoria);
-                context.SaveChanges();
+                if (usuuario.IdRol != 2 && usuuario.IdRol != null)
+                {
+                    ValidarCate(categoria);
+                    if (ModelState.IsValid)
+                    {
+                        context.Categorias.Add(categoria);
+                        context.SaveChanges();
 
-                return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
+                    else {
+                        return View(categoria);
+                    }
+                }
+                return Redirect("~/");
             }
-            return View(categoria);
+            catch (Exception)
+            {
+                return Redirect("~/");
+            }
         }
 
         //[Authorize]

@@ -17,7 +17,7 @@ namespace DIARS_PROYECTO_FINAL.Models
         [EmailAddress]
         public string email { get; set; }
         public string password { get; set; }
-        public int IdRol { get; set; }
+        public int? IdRol { get; set; }
         public string username{ get; set; }
         public string dni{ get; set; }
         public string nombres { get; set; }

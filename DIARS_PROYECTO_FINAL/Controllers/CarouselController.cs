@@ -14,6 +14,7 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         public StoreContext context = StoreContext.getInstance();
         public ActionResult Index()
         {
+
             var carousel = context.Carousels.ToList();
             return View(carousel);
         }
@@ -21,39 +22,77 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         public ActionResult Comprar() {
             return View();
         }
+       
         public ActionResult Crear() {
-            return View();
+            var usuuario = (Usuario)Session["Usuario"];
+            try
+            {
+                if (usuuario.IdRol != 2 && usuuario.IdRol != null)
+                {
+                    return View(new Carousel());
+                }
+                else {
+                    return Redirect("~/");
+                }
+            }
+            catch (Exception)
+            {
+                return Redirect("~/");
+            }
         }
         [HttpPost]
         public ActionResult Crear(Carousel carousel, HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
+            var usuuario = (Usuario)Session["Usuario"];
+            try
             {
-                string ruta = Path.Combine(Server.MapPath("~/imagenes"), Path.GetFileName(file.FileName));
-                file.SaveAs(ruta);
-                carousel.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
-            }
-            if (ModelState.IsValid)
-            {
-                context.Carousels.Add(carousel);
-                context.SaveChanges();
+                if (file != null && file.ContentLength > 0)
+                {
+                    string ruta = Path.Combine(Server.MapPath("~/imagenes"), Path.GetFileName(file.FileName));
+                    file.SaveAs(ruta);
+                    carousel.imagen = "/imagenes/" + Path.GetFileName(file.FileName);
+                }
+                if (ModelState.IsValid)
+                {
+                    context.Carousels.Add(carousel);
+                    context.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("IndexPrincipal", "Carousel");
+                }
+                return View(carousel);
             }
-            return View(carousel);
+            catch (Exception)
+            {
+                return Redirect("~/");
+            }
         }
 
         public ActionResult Eliminar( int ID) {
             Carousel carousel = context.Carousels.Where(a => a.Id == ID).First();
             context.Carousels.Remove(carousel);
             context.SaveChanges();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("IndexPrincipal", "Carousel");
         }
 
         public ActionResult IndexPrincipal()
         {
-            var carousel = context.Carousels.ToList();
-            return View(carousel);
+            var usuuario = (Usuario)Session["Usuario"];
+            try
+            {
+                if (usuuario.IdRol != 2 && usuuario.IdRol != null)
+                {
+                    var carousel = context.Carousels.ToList();
+                    return View(carousel);
+                }
+                else
+                {
+                    return Redirect("~/");
+                }
+            }
+            catch (Exception)
+            {
+                return Redirect("~/");
+            }
         }
     }
 }

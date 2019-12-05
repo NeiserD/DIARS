@@ -15,8 +15,15 @@ namespace DIARS_PROYECTO_FINAL.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var pagos = context.metodoPagos.ToList();
-            return View(pagos);
+            var usuuario = (Usuario)Session["Usuario"];
+            if (usuuario.IdRol != 2)
+            {
+                var pagos = context.metodoPagos.ToList();
+                return View(pagos);
+            }
+            else {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
 

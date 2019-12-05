@@ -1,8 +1,13 @@
 ﻿
 @{
     ViewBag.Title = "IndexPrincipal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<div class="container">
+    <div class="row">
+        <a class="btn btn-success" href="/Carousel/Crear">Agregar Carousel</a>
+    </div>
+</div>
 <div class="table">
     <table class="table">
         <thead>
@@ -14,7 +19,7 @@
             @foreach (var item in Model)
             {
             <tr>
-                <td> <img src="@item.imagen"  style="width:280px;height:150px" /></td>
+                <td> <img src="@item.imagen"  style="width:600px;height:200px" /></td>
                 <td><a class="btn btn-danger"  href="/Carousel/Eliminar?ID=@item.Id">Eliminar</a></td>
             </tr>
             }

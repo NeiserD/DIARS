@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Crear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="container">
@@ -10,6 +11,7 @@
             <form action="/Carousel/Crear" method="post" enctype="multipart/form-data">
                 <label>Ingrese Imagen</label>
                 <input class="form-control" type="file" name="file" />
+                <br />
                 <button>Guardar</button>
             </form>
         </div>
