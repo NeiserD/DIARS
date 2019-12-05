@@ -225,6 +225,17 @@ namespace DIARS_PROYECTO_FINAL.Controllers
 
         }
         [Authorize]
+        public ActionResult DeleteCarrito(int id)
+        {
+
+            var valor = context.Carritos.Where(a => a.Id == id).FirstOrDefault();
+            context.Carritos.Remove(valor);
+            context.SaveChanges();
+
+            return RedirectToAction("CarritoCompras");
+        }
+
+        [Authorize]
         public ActionResult CarritoCompras() {
             var usuario = (Usuario)Session["Usuario"];
             return View(context.Carritos.Include(a=>a.Producto).Where(a=>a.IdUsuario ==usuario.Id));

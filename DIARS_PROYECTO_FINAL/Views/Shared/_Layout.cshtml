@@ -63,7 +63,7 @@
         }
     </style>
 </head>
-<body >
+<body>
     <!-- HEADER -->
     <header class="position-relative">
         <!-- TOP HEADER -->
@@ -81,51 +81,51 @@
                 <div class="col-lg-2 ">
                     <div class="row">
                         <fieldset style="color:white">
-                            
+
                             <text>
-                                    <div class="">
-                                        Bienvenido, @usuario.username 
-                                        <br />
-                                        <ul class="header-links pull-left">
-                                            <li class="text-left">
-                                                @if (isNotLogueado)
+                                <div class="">
+                                    Bienvenido, @usuario.username
+                                    <br />
+                                    <ul class="header-links pull-left">
+                                        <li class="text-left">
+                                            @if (isNotLogueado)
+                                            {
+                                                if (usuario.IdRol == 1)
                                                 {
-                                                    if (usuario.IdRol == 1)
-                                                    {
-                                                       <div class="container">
-                                                           <div class="row">
-                                                               <div class="col-md-8">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
 
-                                                                   <div class="col-md-6">
-                                                                       <a href="/User/ProfileDetails"><i class="fa fa-user"></i> Ver Perfil</a>
-                                                                       <a href="/User/Salir"><i class="fa fa-power-off"></i> Salir</a>
+                                                                <div class="col-md-6">
+                                                                    <a href="/User/ProfileDetails"><i class="fa fa-user"></i> Ver Perfil</a>
+                                                                    <a href="/User/Salir"><i class="fa fa-power-off"></i> Salir</a>
 
-                                                                   </div>
-                                                                   <div >
-                                                                       <a href="/Producto"><i class="fa fa-tasks "></i> Ir a Módulo de Administración</a>
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                                    }
-                                                    else
-                                                    {
-                                                       <div class="container">
-                                                           <a href="/User/ProfileDetails"><i class="fa fa-user"></i>Ver Perfil</a>
-                                                           <a href="/User/Salir"><i class="fa fa-power-off"></i> Salir</a>
-                                                       </div>
-                                                    }
+                                                                </div>
+                                                                <div>
+                                                                    <a href="/Producto"><i class="fa fa-tasks "></i> Ir a Módulo de Administración</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 }
+                                                else
+                                                {
+                                                    <div class="container">
+                                                        <a href="/User/ProfileDetails"><i class="fa fa-user"></i>Ver Perfil</a>
+                                                        <a href="/User/Salir"><i class="fa fa-power-off"></i> Salir</a>
+                                                    </div>
+                                                }
+                                            }
 
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </text>
-                        
+
                         </fieldset>
                     </div>
                 </div>
-                
+
                 <div class="col align-self-end">
                     <ul class="header-links pull-right">
                         @if (!isNotLogueado)
@@ -166,8 +166,8 @@
                                     <option value="1">Precio</option>
                                     <option value="1">Nombre</option>
                                 </select>
-                                <input class="input" placeholder="Busque aquí">
-                                <button class="search-btn">Buscar</button>
+                                <input id="query" name="query" class="input" value="@ViewBag.datos" autocomplete="off"  placeholder="Busque aquí">
+                                <button id="btnBuscar" class="search-btn">Buscar</button>
                             </form>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                         <div class="header-ctn">
                             @*<div>
 
-                            </div>*@
+                                </div>*@
                             <!-- Wishlist -->
                             @*<div>
                                     <a href="#">
@@ -194,7 +194,7 @@
                                     <span>Tu compra</span>
                                     <div class="qty">@countProductos</div>
                                 </a>
-                                <div class="cart-dropdown">
+                                @*<div class="cart-dropdown">
                                     <div class="cart-list">
                                         <div class="product-widget">
                                             <div class="product-img">
@@ -225,7 +225,7 @@
                                         <a href="#">View Cart</a>
                                         <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                             <!-- /Cart -->
                             <!-- Menu Toogle -->
@@ -258,7 +258,7 @@
                 <ul class="main-nav nav navbar-nav">
                     <li class=""><a href="http://localhost:49852/">Home</a></li>
                     <li><a class="" href="/Home/Conocenos">Conocenos</a></li>
-                   @*<li><a class="navbar-brand" href="/Categoria">Categorías</a></li>*@
+                    @*<li><a class="navbar-brand" href="/Categoria">Categorías</a></li>*@
                 </ul>
                 <!-- /NAV -->
             </div>
@@ -269,6 +269,7 @@
     <!--------------------------------------------------------------------------------------------------------------------------------->
     <div class="container">
         @RenderBody()
+        <div id="tbody"></div>
         <span class="ir-arriba"><i class="fa fa-arrow-circle-o-up"></i></span>
     </div>
     <!-- NEWSLETTER -->
@@ -305,7 +306,7 @@
                             </ul>
                         </div>
                     </div>
-                
+
                     <div class="clearfix visible-xs"></div>
                     <div class="col-md-3 col-xs-7">
                         <div class="footer">
@@ -323,7 +324,7 @@
                         <div class="footer">
                             <h3 class="footer-title">Redes Sociales</h3>
                             <div class="newsletter">
-                             
+
                                 <ul class="newsletter-follow">
                                     <li>
                                         <a style="color: blue;" target="_blank" href="https://www.facebook.com/storeusaonline/"><i class="fa fa-facebook"></i></a>
@@ -414,5 +415,15 @@
 
         });
     </script>
-</body>
-</html>
+
+    <script>
+        $("#btnBuscar").click(function (e) {
+            $.get("/Home/Buscar?query=" + $("#query").val(), function (respuesta) {
+                $("#tbody").html(respuesta);
+            });
+            e.preventDefault();
+        });
+    </script>
+
+</body >
+</html >

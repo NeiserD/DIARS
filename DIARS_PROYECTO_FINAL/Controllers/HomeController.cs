@@ -13,10 +13,28 @@ namespace DIARS_PROYECTO_FINAL.Controllers
     {
         public StoreContext context = StoreContext.getInstance();
 
-        public ActionResult Index()
+        public ActionResult Index(string query)
         {
-            var products = context.Productos.ToList();
-            return View(products); 
+            //var products = context.Productos.ToList();
+            //return View(products); 
+            return View();
+        }
+
+        public ActionResult Buscar (string query)
+        {
+            var datos = new List<Producto>();
+   
+            if (query == null || query == "")
+            {
+                datos = context.Productos.ToList();
+            }
+            else
+            {
+                datos = context.Productos.Where(o => o.nombre.Contains(query)).ToList();
+            }
+            ViewBag.datos = query;
+            return View(datos);
+            
         }
         
         public ActionResult UserDashBoard()

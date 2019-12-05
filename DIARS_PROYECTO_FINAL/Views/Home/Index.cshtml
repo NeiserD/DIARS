@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+
 <style>
     strong {
         color: rgba(255, 0, 0, 0.72);
@@ -35,6 +37,7 @@
 <div class="container">
     @*Carousel*@
     <a id="boton"></a>
+  
     <div id="car">
 
     </div>
@@ -43,7 +46,9 @@
 
 <div class="container">
     <div class="row">
-        <a id="btn"></a>
+
+
+        @*<p></p>*@
         <div class="container">
             <div class="row">
                 <div class="col-md-10"> <div id="slick-nav-2" class="products-slick-nav"></div></div>
@@ -80,40 +85,11 @@
         </div>
 
 
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4 text-center col-sm-6">
-                <div class="product">
-                    <div class="product-body">
-                        <div class=" product-img hovereffect" style="padding:50px">
-                            <img src="@item.imagen" style="width:200px;height:250px" />
-                            <br />
-                            <strong class="name">@item.nombre</strong>
-                            <p class="precio">S/ @item.precio</p>
-                            <div class="overlay">
-                                <h2>@item.nombre</h2>
-                                <br /><br /><br /><br />
-                                <a class="info" href="/Producto/Especificaciones?ID=@item.Id">Vista Rápida</a>
 
-                                @*<a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span style="color:white" class="tooltipp">Vista rápida</span></a>*@
+        <div id="tbody">
 
-                            </div>
-                        </div>
-                        <div class="product-btns">
+        </div>
 
-                            @*<a class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Añadir a la compra</span></a>*@
-                            <a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver Detalles</span></a>
-
-                        </div>
-
-
-                    </div>
-                    <div class="product-body">
-                        <button data-carrito="@item.Id" onclick="addCarrito(@item.Id)" class="btn btn-outline-dark" style="background:black;color:white"><i class="fa fa-shopping-cart"></i> Agregar al Carrito</button>
-                    </div>
-                </div>
-            </div>
-        }
         <br />
     </div>
     <div id="slick-nav-1" class="products-slick-nav"></div>
@@ -212,29 +188,51 @@
         }
 </style>
 
-<script>
-    $("#boton").html(function (e) {
-        $.ajax("/Carousel/Index").done(function (res) {
-            $("#car").html(res);
-        })
-    });
 
-    $("#btn").html(function (e) {
-        $.ajax("/Oferta/Ofertas").done(function (res) {
-            $("#div").html(res);
-        })
-    });
+
+    <script>
+        $("#boton").ready(function (e) {
+            $.ajax("/Carousel/Index").done(function (res) {
+                $("#car").html(res);
+            })
+        });
+
+    $("#div").html(function (e) {
+            $.ajax("/Oferta/Ofertas").done(function (res) {
+                $("#div").html(res);
+            })
+        });
 
 
     function addCarrito(valor) {
-       
+
+            $.ajax(`/user/addCarrito?id=${valor}&mcantidad=1`)
+                .done(function (e) {
+                    if (e == "ok") alert("Producto agregado ")
+                    else {
+                        alert(e)
+                    }
+                })
+        }
+
+@*//Buscar productos*@
+
+    $("#btnBuscar").click(function (e) {
+        $.get("/Home/Buscar?query=" + $("#query").val(), function (respuesta) {
+            $("#tbody").html(respuesta);
+        });
+    e.preventDefault();
+});
+
+    function addCarrito(valor) {
+
         $.ajax(`/user/addCarrito?id=${valor}&mcantidad=1`)
             .done(function (e) {
                 if (e == "ok") alert("Producto agregado ")
                 else {
                     alert(e)
                 }
-            })  
+            })
     }
 </script>
 

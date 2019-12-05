@@ -1,0 +1,39 @@
+﻿
+@{Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4 text-center col-sm-6">
+        <div class="product">
+            <div class="product-body">
+                <div class=" product-img hovereffect" style="padding:50px">
+                    <img src="@item.imagen" style="width:200px;height:250px" />
+                    <br />
+                    <strong class="name">@item.nombre</strong>
+                    <p class="precio">S/ @item.precio</p>
+                    <div class="overlay">
+                        <h2>@item.nombre</h2>
+                        <br /><br /><br /><br />
+                        <a class="info" href="/Producto/Especificaciones?ID=@item.Id">Vista Rápida</a>
+
+                        @*<a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span style="color:white" class="tooltipp">Vista rápida</span></a>*@
+
+                    </div>
+                </div>
+                <div class="product-btns">
+
+                    @*<a class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Añadir a la compra</span></a>*@
+                    <a href="/Producto/Especificaciones?ID=@item.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Ver Detalles</span></a>
+
+                </div>
+
+
+            </div>
+            <div class="product-body">
+                <button data-carrito="@item.Id" onclick="addCarrito(@item.Id)" class="btn btn-outline-dark" style="background:black;color:white"><i class="fa fa-shopping-cart"></i> Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+}
